@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5707139345979991527}
+  - component: {fileID: 4342253102611309323}
   m_Layer: 5
   m_Name: GaugeBar
   m_TagString: Untagged
@@ -36,6 +37,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &4342253102611309323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328525927026554588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf06a67336e995479e6fab4fdadeace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 4691192516309702657}
+  value: 0
 --- !u!1 &2737262758038760716
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,8 +138,9 @@ GameObject:
   - component: {fileID: 130080139045109427}
   - component: {fileID: 2691284268356690552}
   - component: {fileID: 349038209249809960}
+  - component: {fileID: 6941311591494217351}
   m_Layer: 5
-  m_Name: Text
+  m_Name: UpdatableText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +262,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6941311591494217351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4700785678598630726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82aeac44cd07f1141986c7442d990d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4854358269189363119
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,5 +589,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasIcon: 0
   icon: {fileID: 0}
-  fillImage: {fileID: 4691192516309702657}
-  value: 0
+  gaugeBar: {fileID: 0}

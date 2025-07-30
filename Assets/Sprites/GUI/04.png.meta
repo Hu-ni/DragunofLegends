@@ -177,6 +177,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: HPBar_Fill
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 102
+        width: 32
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00045d35124c9ea4c8217c4833daeace
+      internalID: -1359460450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -190,6 +211,7 @@ TextureImporter:
     nameFileIdTable:
       ExpBackground: 873775012
       ExpFill: -432196181
+      HPBar_Fill: -1359460450
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
