@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class GaugeBar : MonoBehaviour
     float value;
 
     Transform iconTransform;
-    Transform textTransform;
+    UpdatableTextUI updatableText;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class GaugeBar : MonoBehaviour
         
         foreach (Transform t in GetComponentsInChildren<Transform>())
         {
-            if (iconTransform && textTransform)
+            if (iconTransform && updatableText)
             {
                 break;
             }
@@ -37,9 +38,9 @@ public class GaugeBar : MonoBehaviour
                 iconTransform = t;
                 continue;
             }
-            if (t.name == "Text")
+            if (t.name == "UpdatableText")
             {
-                textTransform = t; 
+                updatableText = t.GetComponent<UpdatableTextUI>(); 
                 continue;
             }
         }
@@ -50,6 +51,7 @@ public class GaugeBar : MonoBehaviour
         }
 
         SetValue(value);
+        updatableText.UpdateText("Lv.1");
     }
 
 
@@ -57,7 +59,7 @@ public class GaugeBar : MonoBehaviour
     {
         if (hasIcon)
         {
-            textTransform.gameObject.SetActive(false);
+            updatableText.gameObject.SetActive(false);
         }
         else
         {
@@ -72,7 +74,12 @@ public class GaugeBar : MonoBehaviour
     /// <param name="value"></param>
     public void SetValue(float value)
     {
+        if (fillImage == null) return;
+
         value = Mathf.Clamp(value, 0f, 1f);
         fillImage.fillAmount = value;
     }
+
+
+    
 }

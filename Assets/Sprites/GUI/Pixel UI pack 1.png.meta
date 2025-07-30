@@ -186,7 +186,7 @@ TextureImporter:
         width: 48
         height: 15
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,6 +194,27 @@ TextureImporter:
       bones: []
       spriteID: 4ae9ca34d73cf5748b233dbf0d5b971e
       internalID: 1552398361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Panel_Background_02
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 432
+        width: 47
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec76e5b9d62fd2041818dcc812d4fda6
+      internalID: -1419236121
       vertices: []
       indices: 
       edges: []
@@ -210,6 +231,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Panel_Background_01: 1552398361
+      Panel_Background_02: -1419236121
       Start: 147188143
       Start_Clicked: -1814634294
   mipmapLimitGroupName: 
