@@ -7,7 +7,6 @@ public class StartButton : MonoBehaviour
 {
     public void OnClickStartButton()
     {
-        Debug.Log("스테이지 씬으로");
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene("Stage");
     }
 }

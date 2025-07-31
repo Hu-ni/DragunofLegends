@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WeaponSelectScene.unity
     guid: 5e06812b24ffd6b4d9fa1bc4f22a9459
+  - enabled: 1
+    path: Assets/Scenes/Stage/Stage.unity
+    guid: be65d304f68ea4341b6783ac811a0cb4
   m_configObjects: {}
