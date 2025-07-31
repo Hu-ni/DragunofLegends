@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private EnemyResourceController _playerResourceController;
+    private ResourceController _playerResourceController;
 
     [SerializeField]
     private int currentWaveIndex = 0;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("EnemyManager가 할당되지 않았습니다");
+            Debug.LogError("EnemyManager가할당되지 않았습니다");
         }
     }
 

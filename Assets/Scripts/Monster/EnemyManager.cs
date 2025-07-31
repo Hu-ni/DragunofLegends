@@ -34,8 +34,6 @@ public class EnemyManager : MonoBehaviour
 
     GameManager gameManager;
 
-    public Transform playerTransform;
-
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
@@ -101,17 +99,7 @@ public class EnemyManager : MonoBehaviour
         // 적 생성 및 리스트에 추가
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
-
-        // 타겟(플레이어) 전달
-        if (enemyController != null && playerTransform != null)
-        {
-            enemyController.Init(this, playerTransform);  
-        }
-        else
-        {
-            Debug.LogWarning("EnemyController 또는 playerTransform이 null입니다.");
-        }
-        //생성한 몬스터한테 타겟 정보 넘기기
+        //enemyController.Init(this, gameManager.player.transform); 생성한 몬스터한테 타겟 정보 넘기기
 
         activeEnemies.Add(enemyController);
     }
