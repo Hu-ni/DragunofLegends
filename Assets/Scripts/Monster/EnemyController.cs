@@ -27,13 +27,13 @@ public class EnemyController : BaseController
     private void Update()
     {
         HandleAction();
-        Move(movementDirection);
     }
 
     public void Init(EnemyManager enemyManager, Transform target)
     {
         this.enemyManager = enemyManager;
         this.target = target;
+        Debug.Log("Init called with target: " + target.name);
     }
 
     protected float DistanceToTarget()
@@ -57,7 +57,6 @@ public class EnemyController : BaseController
 
         float distance = DistanceToTarget();
         Vector2 direction = DirectionToTarget();
-
         lookDirection = direction;
 
         switch (enemyType)

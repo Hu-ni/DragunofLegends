@@ -35,10 +35,6 @@ public class BaseController : MonoBehaviour
         monsterStat = GetComponent<MonsterStat>();
     }
 
-    protected virtual void Start()
-    {
-
-    }
 
     protected virtual void Update()
     {
@@ -63,6 +59,7 @@ public class BaseController : MonoBehaviour
 
     private void Movment(Vector2 direction)
     {
+        Debug.Log($"[Movment] direction: {direction}");
         direction = direction * monsterStat.Speed;
         if (knockbackDuration > 0.0f)
         {
@@ -71,6 +68,8 @@ public class BaseController : MonoBehaviour
         }
 
         _rigidbody.velocity = direction;
+        Debug.Log($"[Movment] direction: {direction}, velocity: {_rigidbody.velocity}");
+        Debug.Log($"[Movment] velocity: {_rigidbody.velocity}");
         animationHandler.Move(direction);
     }
 
@@ -97,9 +96,6 @@ public class BaseController : MonoBehaviour
     {
     }
 
-    protected virtual void Attack()
-    {
-    }
 
     public virtual void Death()
     {

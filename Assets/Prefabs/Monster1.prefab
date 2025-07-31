@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: -147375867085857014}
   - component: {fileID: 5376927438886585179}
   - component: {fileID: 7373590491505464468}
+  - component: {fileID: 8640528608195592678}
+  - component: {fileID: 8394438034234802202}
+  - component: {fileID: 2511838360375174242}
+  - component: {fileID: 5810073355186151522}
   m_Layer: 0
   m_Name: Monster1
   m_TagString: Untagged
@@ -200,3 +204,56 @@ MonoBehaviour:
   fireCooldown: 2
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}
+--- !u!114 &8640528608195592678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178002136627635288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4c96161421a394bbbef2e56a779afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 8840040047453265727}
+  weaponPivot: {fileID: 0}
+--- !u!114 &8394438034234802202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178002136627635288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbff9ed41e8815e49a541da51bc296bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  speed: 3
+--- !u!114 &2511838360375174242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178002136627635288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9becf58cd63f82941a70c34285ed1685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5810073355186151522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178002136627635288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca1d82b8e6003d408d196ed3d96ad4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
