@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 데미지 (Player 체력과 연결하기)
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
+            PlayerHealthtest player = other.GetComponent<PlayerHealthtest>();
             if (player != null)
             {
                 player.TakeDamage(damage);

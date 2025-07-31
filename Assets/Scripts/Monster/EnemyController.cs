@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyController : BaseController
+public class EnemyController : EnemyBaseController
 {
     private EnemyManager enemyManager;
     private Transform target;

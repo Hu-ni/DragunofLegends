@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceController : MonoBehaviour
+public class EnemyResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = .5f;
 
-    private BaseController baseController;
+    private EnemyBaseController baseController;
     private MonsterStat monsterStat;
     private AnimationHandler animationHandler;
 
@@ -19,7 +19,7 @@ public class ResourceController : MonoBehaviour
     {
         monsterStat = GetComponent<MonsterStat>();
         animationHandler = GetComponent<AnimationHandler>();
-        baseController = GetComponent<BaseController>();
+        baseController = GetComponent<EnemyBaseController>();
     }
 
     private void Start()
