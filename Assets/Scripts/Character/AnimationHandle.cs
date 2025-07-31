@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class AnimationHandler : MonoBehaviour
+public class AnimationHandle : MonoBehaviour
 {
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     public GameObject playerSpriteObject;
 
-    // ÀÌÀü¿¡ ´ë°¢¼±À¸·Î ¿òÁ÷¿´´ÂÁö ¿©ºÎ¸¦ ÀúÀåÇÒ º¯¼ö Ãß°¡
+    // ì´ì „ì— ëŒ€ê°ì„ ìœ¼ë¡œ ì›€ì§ì˜€ëŠ”ì§€ ì—¬ë¶€ë¥¼ ì €ì¥í•  ë³€ìˆ˜ ì¶”ê°€
     private bool _lastMovementWasDiagonal = false;
 
     void Awake()
@@ -21,7 +21,7 @@ public class AnimationHandler : MonoBehaviour
             }
             else
             {
-                Debug.LogError("AnimationHandler: 'Player' child object not found. Please assign 'Player Sprite Object' in the Inspector.", this);
+                Debug.LogError("AnimationHandle: 'Player' child object not found. Please assign 'Player Sprite Object' in the Inspector.", this);
                 return;
             }
         }
@@ -31,11 +31,11 @@ public class AnimationHandler : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.LogError("AnimationHandler: Animator component not found on Player sprite object.", this);
+            Debug.LogError("AnimationHandle: Animator component not found on Player sprite object.", this);
         }
         if (spriteRenderer == null)
         {
-            Debug.LogError("AnimationHandler: SpriteRenderer component not found on Player sprite object.", this);
+            Debug.LogError("AnimationHandle: SpriteRenderer component not found on Player sprite object.", this);
         }
     }
 
@@ -46,28 +46,28 @@ public class AnimationHandler : MonoBehaviour
         float moveX = movementInput.x;
         float moveY = movementInput.y;
 
-        bool isMoving = movementInput.magnitude > 0.1f; // ¾à°£ÀÇ ¿ÀÂ÷ ¹üÀ§ Çã¿ë (Á¤Áö »óÅÂ ÆÇ´Ü)
+        bool isMoving = movementInput.magnitude > 0.1f; // ì•½ê°„ì˜ ì˜¤ì°¨ ë²”ìœ„ í—ˆìš© (ì •ì§€ ìƒíƒœ íŒë‹¨)
 
-        // ÇöÀç ´ë°¢¼±À¸·Î ¿òÁ÷ÀÌ´Â ÁßÀÎÁö ÆÇ´Ü
+        // í˜„ì¬ ëŒ€ê°ì„ ìœ¼ë¡œ ì›€ì§ì´ëŠ” ì¤‘ì¸ì§€ íŒë‹¨
         bool currentlyMovingDiagonal = (Mathf.Abs(moveX) > 0.1f && Mathf.Abs(moveY) > 0.1f);
 
-        // Animator ÆÄ¶ó¹ÌÅÍ ¾÷µ¥ÀÌÆ®
+        // Animator íŒŒë¼ë¯¸í„° ì—…ë°ì´íŠ¸
         animator.SetFloat("MoveX", moveX);
         animator.SetFloat("MoveY", moveY);
         animator.SetBool("IsMoving", isMoving);
 
-        // ÀÌµ¿ ÁßÀÏ ¶§¸¸ _lastMovementWasDiagonalÀ» ¾÷µ¥ÀÌÆ®
+        // ì´ë™ ì¤‘ì¼ ë•Œë§Œ _lastMovementWasDiagonalì„ ì—…ë°ì´íŠ¸
         if (isMoving)
         {
             _lastMovementWasDiagonal = currentlyMovingDiagonal;
         }
 
-        // AnimatorÀÇ IsDiagonal ÆÄ¶ó¹ÌÅÍ´Â ÇöÀç ´ë°¢¼± ÀÌµ¿ ÁßÀÌ°Å³ª,
-        // (Á¤Áö »óÅÂÀÎµ¥) ¸¶Áö¸· ÀÌµ¿ÀÌ ´ë°¢¼±ÀÌ¾úÀ» °æ¿ì true°¡ µÇµµ·Ï ¼³Á¤
-        // ÀÌ ºÎºĞÀÌ ÇÙ½É ¼öÁ¤ »çÇ×ÀÔ´Ï´Ù.
+        // Animatorì˜ IsDiagonal íŒŒë¼ë¯¸í„°ëŠ” í˜„ì¬ ëŒ€ê°ì„  ì´ë™ ì¤‘ì´ê±°ë‚˜,
+        // (ì •ì§€ ìƒíƒœì¸ë°) ë§ˆì§€ë§‰ ì´ë™ì´ ëŒ€ê°ì„ ì´ì—ˆì„ ê²½ìš° trueê°€ ë˜ë„ë¡ ì„¤ì •
+        // ì´ ë¶€ë¶„ì´ í•µì‹¬ ìˆ˜ì • ì‚¬í•­ì…ë‹ˆë‹¤.
         animator.SetBool("IsDiagonal", isMoving ? currentlyMovingDiagonal : _lastMovementWasDiagonal);
 
-        // SpriteRenderer flipX¸¦ ÀÌ¿ëÇÑ ÁÂ¿ì ¹İÀü (¼±ÅÃ »çÇ×)
+        // SpriteRenderer flipXë¥¼ ì´ìš©í•œ ì¢Œìš° ë°˜ì „ (ì„ íƒ ì‚¬í•­)
         if (moveX < 0)
         {
             spriteRenderer.flipX = true;

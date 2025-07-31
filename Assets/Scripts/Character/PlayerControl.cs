@@ -2,37 +2,37 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float moveSpeed = 5f; // ÀÌµ¿ ¼Óµµ
+    public float moveSpeed = 5f; // ì´ë™ ì†ë„
     private Rigidbody2D rb;
-    private AnimationHandler animationHandler; // AnimationHandler ½ºÅ©¸³Æ® ÂüÁ¶
+    private AnimationHandle AnimationHandler; // animationHandler ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°
 
-    private Vector2 movementInput; // ÇöÀç ÀÌµ¿ ÀÔ·Â °ª
+    private Vector2 movementInput; // í˜„ì¬ ì´ë™ ì…ë ¥ ê°’
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>(); // °°Àº ¿ÀºêÁ§Æ®¿¡ ÀÖ´Â AnimationHandler ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+        AnimationHandler = GetComponent<AnimationHandle>(); // ê°™ì€ ì˜¤ë¸Œì íŠ¸ì— ìˆëŠ” AnimationHandler ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
     }
 
     void Update()
     {
-        // ÀÔ·Â Ã³¸®
-        movementInput.x = Input.GetAxisRaw("Horizontal"); // A, D Å° ¶Ç´Â Left/Right Arrow
-        movementInput.y = Input.GetAxisRaw("Vertical");   // W, S Å° ¶Ç´Â Up/Down Arrow
+        // ì…ë ¥ ì²˜ë¦¬
+        movementInput.x = Input.GetAxisRaw("Horizontal"); // A, D í‚¤ ë˜ëŠ” Left/Right Arrow
+        movementInput.y = Input.GetAxisRaw("Vertical");   // W, S í‚¤ ë˜ëŠ” Up/Down Arrow
 
-        // ÀÔ·Â Á¤±ÔÈ­ (´ë°¢¼± ÀÌµ¿ ½Ã ¼Óµµ ÀÏÁ¤ÇÏ°Ô À¯Áö)
+        // ì…ë ¥ ì •ê·œí™” (ëŒ€ê°ì„  ì´ë™ ì‹œ ì†ë„ ì¼ì •í•˜ê²Œ ìœ ì§€)
         if (movementInput.magnitude > 1f)
         {
             movementInput.Normalize();
         }
 
-        // AnimationHandler¿¡ ÀÔ·Â Á¤º¸ Àü´Ş
-        animationHandler.SetAnimationParameters(movementInput);
+        // AnimationHandlerì— ì…ë ¥ ì •ë³´ ì „ë‹¬
+        AnimationHandler.SetAnimationParameters(movementInput);
     }
 
     void FixedUpdate()
     {
-        // ¹°¸® ¾÷µ¥ÀÌÆ® (FixedUpdate¿¡¼­ Ã³¸®ÇÏ´Â °ÍÀÌ ¾ÈÁ¤Àû)
+        // ë¬¼ë¦¬ ì—…ë°ì´íŠ¸ (FixedUpdateì—ì„œ ì²˜ë¦¬í•˜ëŠ” ê²ƒì´ ì•ˆì •ì )
         rb.MovePosition(rb.position + movementInput * moveSpeed * Time.fixedDeltaTime);
     }
 }
