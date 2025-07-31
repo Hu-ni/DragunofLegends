@@ -59,6 +59,7 @@ public class ResultPopupUI : PopupUI
     }
 
 
+    // 스테이지 끝날때 호출해야 함
     public void Initialize(int stage, int bestStage)
     {
         InitCurrentStage(stage);
