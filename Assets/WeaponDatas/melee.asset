@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030d873e16f36c647a5eb96e0322b250, type: 3}
   m_Name: melee
   m_EditorClassIdentifier: 
-  Level: 0100000002000000030000000400000005000000
+  level: 0100000002000000030000000400000005000000
+  weaponType: 1
   weaponDamage: 050000000a0000000f0000001400000019000000
   fireRate:
   - 2

@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponType : MonoBehaviour
+public enum WeaponType
 {
-public enum WeaponTypes
-    {
-        range,
-        melee,
-        chase
-    }
+    range,
+    melee,
+    chase
 }
