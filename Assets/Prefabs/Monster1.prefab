@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7236951174200120549}
   - component: {fileID: -147375867085857014}
   - component: {fileID: 5376927438886585179}
+  - component: {fileID: 7373590491505464468}
   m_Layer: 0
   m_Name: Monster1
   m_TagString: Untagged
@@ -147,7 +148,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -180,3 +181,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7373590491505464468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178002136627635288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0b1d37cc148b64fba88776246ab2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 0}
+  weaponPivot: {fileID: 0}
+  enemyType: 0
+  attackRange: 5
+  fireCooldown: 2
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
