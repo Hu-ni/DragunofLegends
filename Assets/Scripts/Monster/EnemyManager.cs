@@ -21,6 +21,8 @@ public class EnemyManager : MonoBehaviour
 
     private bool enemySpawnComplite;
 
+    private bool alreadyStarted = false;
+
     [SerializeField]
     private float timeBetweenSpawns = 0.2f;
 
@@ -39,6 +41,9 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
+        if (alreadyStarted) return;
+        alreadyStarted = true;
+
         StartWave(numberOfEnemiesToSpawn);
     }
 
