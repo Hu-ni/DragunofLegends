@@ -66,5 +66,4 @@ public class GaugeBar_HUD : MonoBehaviour
 
     }
     
-
 }

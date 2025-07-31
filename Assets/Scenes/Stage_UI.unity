@@ -504,50 +504,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1689696325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1689696327}
-  - component: {fileID: 1689696326}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1689696326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689696325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b42b8aaa515445f4eaf3419b36d50d9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1689696327
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1689696325}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 163.25575, y: 478.16074, z: -3.9055603}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1767786811
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,14 +873,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3661112923087792401, guid: 62ead080f4e410240932eeed410b3e87, type: 3}
-      propertyPath: icon
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3661112923087792401, guid: 62ead080f4e410240932eeed410b3e87, type: 3}
-      propertyPath: hasIcon
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8649379421201279749, guid: 62ead080f4e410240932eeed410b3e87, type: 3}
       propertyPath: m_Name
       value: GaugeBar_HUD
@@ -941,4 +889,3 @@ SceneRoots:
   - {fileID: 164246070}
   - {fileID: 1328871686}
   - {fileID: 1521451418}
-  - {fileID: 1689696327}
