@@ -23,7 +23,7 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    protected StatHandler statHandler;
+    protected MonsterStat monsterStat;
 
     protected bool isAttacking;
     private float timeSinceLastAttack = float.MaxValue;
@@ -32,7 +32,7 @@ public class BaseController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
-        statHandler = GetComponent<StatHandler>();
+        monsterStat = GetComponent<MonsterStat>();
     }
 
     protected virtual void Start()
@@ -63,7 +63,7 @@ public class BaseController : MonoBehaviour
 
     private void Movment(Vector2 direction)
     {
-        direction = direction * statHandler.Speed;
+        direction = direction * monsterStat.Speed;
         if (knockbackDuration > 0.0f)
         {
             direction *= 0.2f;

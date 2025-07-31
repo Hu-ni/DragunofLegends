@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("EnemyManager가할당되지 않았습니다");
+            Debug.LogError("EnemyManager가 할당되지 않았습니다");
         }
     }
 

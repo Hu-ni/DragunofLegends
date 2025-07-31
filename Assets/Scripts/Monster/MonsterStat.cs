@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatHandler : MonoBehaviour
+public class MonsterStat : MonoBehaviour
 {
     [Range(1, 100)]
     [SerializeField]
