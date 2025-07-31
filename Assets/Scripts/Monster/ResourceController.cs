@@ -7,24 +7,24 @@ public class ResourceController : MonoBehaviour
     [SerializeField] private float healthChangeDelay = .5f;
 
     private BaseController baseController;
-    private MonsterStat monsterStat;
+    private StatHandler statHandler;
     private AnimationHandler animationHandler;
 
     private float timeSinceLastChange = float.MaxValue;
 
     public float CurrentHealth { get; private set; }
-    public float MaxHealth => monsterStat.Health;
+    public float MaxHealth => statHandler.Health;
 
     private void Awake()
     {
-        monsterStat = GetComponent<MonsterStat>();
+        statHandler = GetComponent<StatHandler>();
         animationHandler = GetComponent<AnimationHandler>();
         baseController = GetComponent<BaseController>();
     }
 
     private void Start()
     {
-        CurrentHealth = monsterStat.Health;
+        CurrentHealth = statHandler.Health;
     }
 
     private void Update()
