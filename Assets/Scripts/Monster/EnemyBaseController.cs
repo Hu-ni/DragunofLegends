@@ -99,10 +99,14 @@ public class EnemyBaseController : MonoBehaviour
 
     private void Rotate(Vector2 direction)
     {
-        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
-
-        characterRenderer.flipX = isLeft;
+        if (direction.x < 0)
+        {
+            characterRenderer.flipX = true; // 왼쪽
+        }
+        else if (direction.x > 0)
+        {
+            characterRenderer.flipX = false; // 오른쪽
+        }
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)

@@ -30,4 +30,6 @@ public abstract class WeaponBase : MonoBehaviour
         cooldown = weaponData.cooldowns[level];
         criticalChance = weaponData.criticalChances[level];
     }
+
+    public abstract void Attack();
 }
