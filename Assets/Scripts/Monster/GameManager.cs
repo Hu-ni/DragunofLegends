@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private EnemyManager enemyManager;
 
+    private StageManager _stage;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,17 +34,23 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("EnemyManager가할당되지 않았습니다");
         }
+
+        if (_stage != null)
+            _stage.Initialize(this);
+        else
+            Debug.LogError("EnemyManager가할당되지 않았습니다");
+
     }
 
     private void Start()
     {
-        Debug.Log("GameManager Start 메서드 호출됨!");
+        //Debug.Log("GameManager Start 메서드 호출됨!");
         currentWaveIndex = 0;
         StartGame();
     }
 
     public void StartGame()
-    {
+    { 
         StartNextWave();
     }
 
@@ -50,6 +58,14 @@ public class GameManager : MonoBehaviour
     {
         currentWaveIndex += 1;
         enemyManager.StartWave(1 + currentWaveIndex / 5);
+    }
+
+    public void ClearStage()
+    {
+        // 스테이지 생성
+        // 몬스터 스폰
+        // UI 업데이트
+        _stage.CreateStage();
     }
 
     public void GameOver()
