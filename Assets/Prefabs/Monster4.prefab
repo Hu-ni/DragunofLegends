@@ -180,6 +180,7 @@ MonoBehaviour:
   attackRange: 5
   meleeDamage: 10
   projectilePrefab: {fileID: 5188572181617536325, guid: 28c161c709c162246bfa8ab3a1854b6c, type: 3}
+  projectileSpeed: 5
   firePoint: {fileID: 3160005920719730546}
   fireCooldown: 1
 --- !u!114 &1476912140949407194

@@ -13,6 +13,7 @@ public class EnemyController : EnemyBaseController
     [SerializeField] private float meleeDamage = 10f;
 
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireCooldown = 2f;
     private float fireTimer;
@@ -102,7 +103,7 @@ public class EnemyController : EnemyBaseController
             Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
             if (bulletRigidbody != null)
             {
-                bulletRigidbody.velocity = direction * 10f;
+                bulletRigidbody.velocity = direction * projectileSpeed;
             }
         }
     }

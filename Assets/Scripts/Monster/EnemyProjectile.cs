@@ -18,11 +18,11 @@ public class EnemyProjectile : MonoBehaviour
                 player.TakeDamage(damage);
             }
 
-            Destroy(gameObject); // 총알 제거
+            Destroy(gameObject);
         }
 
-        // 예: 벽과 부딪혀도 사라지게 하고 싶을 때
-        if (other.gameObject.layer == LayerMask.NameToLayer("Level"))
+        // 벽과 부딪히면 삭제
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Destroy(gameObject);
         }

@@ -27,10 +27,10 @@ public class EnemyManager : MonoBehaviour
     private float timeBetweenSpawns = 0.2f;
 
     [SerializeField]
-    private float timeBetweenWaves = 1f;
+    private float timeBetweenWaves = 0f;
 
     [SerializeField]
-    private int numberOfEnemiesToSpawn = 5;
+    private int numberOfEnemiesToSpawn = 4;
 
     GameManager gameManager;
 
