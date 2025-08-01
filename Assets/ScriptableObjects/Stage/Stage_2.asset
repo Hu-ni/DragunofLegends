@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384f4a33e590d1e4d8df10413295b633, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b9e0158e24845d468416d77b3d05c15, type: 3}
   m_Name: Stage_2
   m_EditorClassIdentifier: 
-  _stage: {fileID: 3642061481834612899, guid: c93b8db617681894da5139c2813cdf84, type: 3}
+  _type: 0
+  _prefabs: {fileID: 3642061481834612899, guid: c93b8db617681894da5139c2813cdf84, type: 3}
   _monsters: []
+  _monstersCount: 0
