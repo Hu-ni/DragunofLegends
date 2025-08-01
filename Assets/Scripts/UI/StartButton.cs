@@ -7,7 +7,7 @@ public class StartButton : MonoBehaviour
 {
     public void OnClickStartButton()
     {
-        Debug.Log("스테이지 씬으로");
-        //SceneManager.LoadScene();
+        Debug.Log("게임 시작 연결필요");
+        //SceneManager.LoadScene("Stage");
     }
 }

@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ToggleButton : MonoBehaviour
 {
     [SerializeField]
     Animator animator;
+    [SerializeField]
+    Image frame;
 
     ToggleButtonList toggleButtonList;
 
@@ -18,6 +21,11 @@ public class ToggleButton : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         }
 
+        if (frame == null)
+        {
+            frame = animator.GetComponent<Image>();
+        }
+
         if (toggleButtonList == null)
         {
             toggleButtonList = GetComponentInParent<ToggleButtonList>();
@@ -25,10 +33,31 @@ public class ToggleButton : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        Color color = frame.color;
+        color.a = 0f;
+        frame.color = color;
+    }
+
+
     public void OnClickToggleButton()
     {
         isSelected = !isSelected;
         animator.SetBool("IsSelected", isSelected);
+
+        if (isSelected)
+        {
+            Color color = frame.color;
+            color.a = 1f;
+            frame.color = color;
+        }
+        else
+        {
+            Color color = frame.color;
+            color.a = 0f;
+            frame.color = color;
+        }
         
     }
 
