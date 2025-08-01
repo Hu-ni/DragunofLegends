@@ -6,6 +6,8 @@ using UnityEngine;
 public class WeaponAttack : MonoBehaviour
 {
     public WeaponData weaponData;
+
+
     public void Attack()
     {
         switch (weaponData.weaponType)

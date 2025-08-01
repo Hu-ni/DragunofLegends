@@ -8,10 +8,10 @@ public class RangeWeaponHandler : WeaponHandler
     public Transform firePoint;                   // 투사체 생성 위치
 
     private float nextFireTime = 0f;              // 다음 공격 시간
+    public float rangeShootSpeed = 0.5f;  //투사체속도
 
     private void Update()
     {
-        AimAtMouse(); // 마우스를 향해 회전
 
         // 공격 쿨타임이 지났다면 공격 실행
         if (Time.time >= nextFireTime)
@@ -26,3 +26,4 @@ public class RangeWeaponHandler : WeaponHandler
     {
 
     }
+}
