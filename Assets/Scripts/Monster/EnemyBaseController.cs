@@ -5,8 +5,7 @@ public class EnemyBaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField]
-    private SpriteRenderer characterRenderer;
+    [SerializeField] private SpriteRenderer characterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -20,9 +19,10 @@ public class EnemyBaseController : MonoBehaviour
     protected EnemyAnimationHandler enemyanimationHandler;
     protected EnemyStatHandler enemystatHandler;
 
+    protected bool isAgentMoving;
     protected bool isAttacking;
 
-    protected bool useAgentMovement = false;
+    protected bool useAgentMovement = true;
     protected NavMeshAgent agent;
 
     protected virtual void Awake()
@@ -52,8 +52,14 @@ public class EnemyBaseController : MonoBehaviour
 
         if (useAgentMovement && agent != null)
         {
-            // NavMeshAgent의 속도로 애니메이션 갱신
-            enemyanimationHandler.Move(agent.velocity);
+            if (knockbackDuration <= 0.0f && isAgentMoving)
+            {
+                enemyanimationHandler.Move(agent.velocity);
+            }
+            else
+            {
+                enemyanimationHandler.Move(Vector2.zero);
+            }
         }
     }
 
@@ -62,7 +68,22 @@ public class EnemyBaseController : MonoBehaviour
 
         if (knockbackDuration > 0.0f)
         {
+            // 넉백 중일 때는 NavMeshAgent를 멈춤
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = true;
+            }
+            _rigidbody.velocity = knockback;
             knockbackDuration -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            // 넉백이 끝나면 NavMeshAgent를 다시 활성화하고 Rigidbody 속도를 초기화
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = false;
+            }
+            _rigidbody.velocity = Vector2.zero;
         }
     }
 
