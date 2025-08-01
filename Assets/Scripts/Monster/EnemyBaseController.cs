@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class EnemyBaseController : MonoBehaviour
 {
@@ -24,6 +27,9 @@ public class EnemyBaseController : MonoBehaviour
 
     protected bool useAgentMovement = true;
     protected NavMeshAgent agent;
+
+    private int _id;
+    private SpawningPool _pool;
 
     protected virtual void Awake()
     {
@@ -113,22 +119,55 @@ public class EnemyBaseController : MonoBehaviour
     {
     }
 
+    public void Spawn(Transform pos)
+    {
+        transform.parent = pos;
+        transform.position = pos.position;
+        gameObject.SetActive(true);
+    }
+
     public virtual void Death()
     {
         _rigidbody.velocity = Vector3.zero;
-
         foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
         {
             Color color = renderer.color;
             color.a = 0.3f;
             renderer.color = color;
         }
+        // 20250801 - PH: 코루틴 처리
+        StartCoroutine(ReturnAfterDelay());
 
-        foreach (Behaviour component in transform.GetComponentsInChildren<Behaviour>())
+        // 풀링 재사용으로 주석처리
+
+        //foreach (Behaviour component in transform.GetComponentsInChildren<Behaviour>())
+        //{
+        //    component.enabled = false;
+        //}
+
+
+        //Destroy(gameObject, 2f);
+    }
+
+    private IEnumerator ReturnAfterDelay()
+    {
+        // 2초 대기
+        yield return new WaitForSeconds(2.0f);
+
+        foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
         {
-            component.enabled = false;
+            Color color = renderer.color;
+            color.a = 1f;
+            renderer.color = color;
         }
 
-        Destroy(gameObject, 2f);
+        gameObject.SetActive(false);
+        _pool.ReturnMonster(_id, gameObject);
+    }
+
+    public void Initialize(int id, SpawningPool pool)
+    {
+        _id = id;
+        _pool = pool;
     }
 }
