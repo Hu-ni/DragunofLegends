@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class BaseController : MonoBehaviour
+public class EnemyBaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
 
-    [SerializeField]
-    private SpriteRenderer characterRenderer;
-
-    [SerializeField]
-    private Transform weaponPivot;
+    [SerializeField] private SpriteRenderer characterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -21,18 +16,27 @@ public class BaseController : MonoBehaviour
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
-    protected AnimationHandler animationHandler;
+    protected EnemyAnimationHandler enemyanimationHandler;
+    protected EnemyStatHandler enemystatHandler;
 
-    protected StatHandler statHandler;
-
+    protected bool isAgentMoving;
     protected bool isAttacking;
-    private float timeSinceLastAttack = float.MaxValue;
+
+    protected bool useAgentMovement = true;
+    protected NavMeshAgent agent;
 
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>();
-        statHandler = GetComponent<StatHandler>();
+        enemyanimationHandler = GetComponent<EnemyAnimationHandler>();
+        enemystatHandler = GetComponent<EnemyStatHandler>();
+
+        agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
     }
 
     protected virtual void Start()
@@ -45,33 +49,46 @@ public class BaseController : MonoBehaviour
         HandleAction();
         Rotate(lookDirection);
         HandleAttackDelay();
+
+        if (useAgentMovement && agent != null)
+        {
+            if (knockbackDuration <= 0.0f && isAgentMoving)
+            {
+                enemyanimationHandler.Move(agent.velocity);
+            }
+            else
+            {
+                enemyanimationHandler.Move(Vector2.zero);
+            }
+        }
     }
 
     protected virtual void FixedUpdate()
     {
-        Movment(movementDirection);
+
         if (knockbackDuration > 0.0f)
         {
+            // 넉백 중일 때는 NavMeshAgent를 멈춤
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = true;
+            }
+            _rigidbody.velocity = knockback;
             knockbackDuration -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            // 넉백이 끝나면 NavMeshAgent를 다시 활성화하고 Rigidbody 속도를 초기화
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = false;
+            }
+            _rigidbody.velocity = Vector2.zero;
         }
     }
 
     protected virtual void HandleAction()
     {
-
-    }
-
-    private void Movment(Vector2 direction)
-    {
-        direction = direction * statHandler.Speed;
-        if (knockbackDuration > 0.0f)
-        {
-            direction *= 0.2f;
-            direction += knockback;
-        }
-
-        _rigidbody.velocity = direction;
-        animationHandler.Move(direction);
     }
 
     private void Rotate(Vector2 direction)
@@ -80,11 +97,6 @@ public class BaseController : MonoBehaviour
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         characterRenderer.flipX = isLeft;
-
-        if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        }
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
@@ -120,4 +132,3 @@ public class BaseController : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 }
-

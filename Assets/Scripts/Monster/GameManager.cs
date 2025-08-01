@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private ResourceController _playerResourceController;
+    private EnemyResourceController _playerResourceController;
 
     [SerializeField]
     private int currentWaveIndex = 0;

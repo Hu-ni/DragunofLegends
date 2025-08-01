@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerTracking : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
+    [SerializeField] public Transform _target;
+    public bool canMove = true;
     NavMeshAgent _agent;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,9 @@ public class PlayerTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _agent.SetDestination(_target.position); // Agent에게 target의 현재 위치로 이동하도록 지시
+        if (canMove)
+        {
+            _agent.SetDestination(_target.position); // Agent에게 target의 현재 위치로 이동하도록 지시
+        }
     }
 }
