@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyResourceController : MonoBehaviour
+public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = .5f;
 
-    private EnemyBaseController enemybasecontroller;
+    private BaseController baseController;
     private StatHandler statHandler;
     private AnimationHandler animationHandler;
 
@@ -19,7 +19,7 @@ public class EnemyResourceController : MonoBehaviour
     {
         statHandler = GetComponent<StatHandler>();
         animationHandler = GetComponent<AnimationHandler>();
-        enemybasecontroller = GetComponent<EnemyBaseController>();
+        baseController = GetComponent<BaseController>();
     }
 
     private void Start()
@@ -67,7 +67,7 @@ public class EnemyResourceController : MonoBehaviour
 
     private void Death()
     {
-        enemybasecontroller.Death();
+        baseController.Death();
     }
 
 }
