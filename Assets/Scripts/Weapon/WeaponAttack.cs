@@ -7,7 +7,11 @@ public class WeaponAttack : MonoBehaviour
 {
     public WeaponData weaponData;
 
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     public void Attack()
     {
         switch (weaponData.weaponType)
