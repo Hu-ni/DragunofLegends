@@ -4,14 +4,14 @@ public class PlayerControl : MonoBehaviour
 {
     public float moveSpeed = 5f; // 이동 속도
     private Rigidbody2D rb;
-    private AnimationHandle AnimationHandler; // animationHandler 스크립트 참조
+    private AnimationHandle AnimationHandler; // AnimationHandle 스크립트 참조
 
     private Vector2 movementInput; // 현재 이동 입력 값
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        AnimationHandler = GetComponent<AnimationHandle>(); // 같은 오브젝트에 있는 AnimationHandler 컴포넌트 가져오기
+        AnimationHandler = GetComponent<AnimationHandle>(); // 같은 오브젝트에 있는 AnimationHandle 컴포넌트 가져오기
     }
 
     void Update()

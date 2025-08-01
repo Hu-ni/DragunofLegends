@@ -399,6 +399,7 @@ MonoBehaviour:
   timeBetweenSpawns: 0.01
   timeBetweenWaves: 0.1
   numberOfEnemiesToSpawn: 4
+  playerTransform: {fileID: 0}
 --- !u!4 &1978426528
 Transform:
   m_ObjectHideFlags: 0
