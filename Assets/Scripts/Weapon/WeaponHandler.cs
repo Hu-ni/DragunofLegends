@@ -32,9 +32,8 @@ public class WeaponHandler : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        currentLevel = weaponLevel;
-
         // 무기 스탯 초기화 (현재 레벨 기준)
+        level = weaponData.level;
         Delay = weaponData.fireRate[currentLevel];
         Power = weaponData.weaponDamage[currentLevel];
         AttackRange = weaponData.range[currentLevel];
