@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBaseController : MonoBehaviour
 {
@@ -8,9 +7,6 @@ public class EnemyBaseController : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer characterRenderer;
-
-    [SerializeField]
-    private Transform weaponPivot;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -21,18 +17,27 @@ public class EnemyBaseController : MonoBehaviour
     private Vector2 knockback = Vector2.zero;
     private float knockbackDuration = 0.0f;
 
-    protected AnimationHandler animationHandler;
-
-    protected StatHandler statHandler;
+    protected EnemyAnimationHandler enemyanimationHandler;
+    protected EnemyStatHandler enemystatHandler;
 
     protected bool isAttacking;
     private float timeSinceLastAttack = float.MaxValue;
 
+    protected bool useAgentMovement = false;
+    protected NavMeshAgent agent;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>();
-        statHandler = GetComponent<StatHandler>();
+        enemyanimationHandler = GetComponent<EnemyAnimationHandler>();
+        enemystatHandler = GetComponent<EnemyStatHandler>();
+
+        agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
     }
 
     protected virtual void Start()
@@ -45,11 +50,17 @@ public class EnemyBaseController : MonoBehaviour
         HandleAction();
         Rotate(lookDirection);
         HandleAttackDelay();
+
+        if (useAgentMovement && agent != null)
+        {
+            // NavMeshAgent의 속도로 애니메이션 갱신
+            enemyanimationHandler.Move(agent.velocity);
+        }
     }
 
     protected virtual void FixedUpdate()
     {
-        Movment(movementDirection);
+
         if (knockbackDuration > 0.0f)
         {
             knockbackDuration -= Time.fixedDeltaTime;
@@ -58,20 +69,6 @@ public class EnemyBaseController : MonoBehaviour
 
     protected virtual void HandleAction()
     {
-
-    }
-
-    private void Movment(Vector2 direction)
-    {
-        direction = direction * statHandler.Speed;
-        if (knockbackDuration > 0.0f)
-        {
-            direction *= 0.2f;
-            direction += knockback;
-        }
-
-        _rigidbody.velocity = direction;
-        animationHandler.Move(direction);
     }
 
     private void Rotate(Vector2 direction)
@@ -80,11 +77,6 @@ public class EnemyBaseController : MonoBehaviour
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
         characterRenderer.flipX = isLeft;
-
-        if (weaponPivot != null)
-        {
-            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
-        }
     }
 
     public void ApplyKnockback(Transform other, float power, float duration)
@@ -120,4 +112,3 @@ public class EnemyBaseController : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 }
-

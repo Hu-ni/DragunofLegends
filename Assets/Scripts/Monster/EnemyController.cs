@@ -1,11 +1,30 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : EnemyBaseController
 {
     private EnemyManager enemyManager;
     private Transform target;
+    private NavMeshAgent agent;
 
-    [SerializeField] private float followRange = 15f;
+    public enum EnemyType { Melee, Ranged }
+
+    [SerializeField]
+    private EnemyType enemyType;
+
+    [SerializeField]
+    private float attackRange = 5f;
+
+    [SerializeField]
+    private GameObject projectilePrefab;
+
+    [SerializeField]
+    private Transform firePoint;
+
+    [SerializeField]
+    private float fireCooldown = 2f;
+
+    private float fireTimer;
 
     public void Init(EnemyManager enemyManager, Transform target)
     {
@@ -13,53 +32,60 @@ public class EnemyController : EnemyBaseController
         this.target = target;
     }
 
-    protected float DistanceToTarget()
+    private void Start()
     {
-        return Vector3.Distance(transform.position, target.position);
+        agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
     }
 
     protected override void HandleAction()
     {
         base.HandleAction();
 
-        if ( target == null)
-        {
-            if (!movementDirection.Equals(Vector2.zero)) movementDirection = Vector2.zero;
+        if (target == null || agent == null)
             return;
-        }
 
-        float distance = DistanceToTarget();
-        Vector2 direction = DirectionToTarget();
+        float distance = Vector3.Distance(transform.position, target.position);
+        Vector2 direction = (target.position - transform.position).normalized;
+        lookDirection = direction;
 
-        isAttacking = false;
-        if (distance <= followRange)
+        switch (enemyType)
         {
-            lookDirection = direction;
+            case EnemyType.Melee:
+                // NavMeshAgent가 알아서 따라가므로 별도 처리 X
+                agent.isStopped = false;
+                break;
 
-            if (distance <= 3)
-            {
-                int layerMaskTarget = 3;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 3 * 1.5f,
-                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
-
-                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+            case EnemyType.Ranged:
+                if (distance > attackRange)
                 {
-                    isAttacking = true;
+                    agent.isStopped = false; // 계속 접근
                 }
+                else
+                {
+                    agent.isStopped = true; // 멈추고 발사
 
-                movementDirection = Vector2.zero;
-                return;
-            }
-
-            movementDirection = direction;
+                    fireTimer -= Time.deltaTime;
+                    if (fireTimer <= 0f)
+                    {
+                        FireProjectile(direction);
+                        fireTimer = fireCooldown;
+                    }
+                }
+                break;
         }
-
     }
 
-    protected Vector2 DirectionToTarget()
+    private void FireProjectile(Vector2 direction)
     {
-        return (target.position - transform.position).normalized;
+        if (projectilePrefab != null && firePoint != null)
+        {
+            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+        }
     }
-
-
 }
