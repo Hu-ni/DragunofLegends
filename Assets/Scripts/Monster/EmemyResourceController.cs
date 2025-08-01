@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceController : MonoBehaviour
+public class EnemyResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = .5f;
 
-    private BaseController baseController;
-    private StatHandler statHandler;
-    private AnimationHandler animationHandler;
+    private EnemyBaseController enemybasecontroller;
+    private EnemyStatHandler enemystatHandler;
+    private EnemyAnimationHandler enemyanimationHandler;
 
     private float timeSinceLastChange = float.MaxValue;
 
     public float CurrentHealth { get; private set; }
-    public float MaxHealth => statHandler.Health;
+    public float MaxHealth => enemystatHandler.Health;
 
     private void Awake()
     {
-        statHandler = GetComponent<StatHandler>();
-        animationHandler = GetComponent<AnimationHandler>();
-        baseController = GetComponent<BaseController>();
+        enemystatHandler = GetComponent<EnemyStatHandler>();
+        enemyanimationHandler = GetComponent<EnemyAnimationHandler>();
+        enemybasecontroller = GetComponent<EnemyBaseController>();
     }
 
     private void Start()
     {
-        CurrentHealth = statHandler.Health;
+        CurrentHealth = enemystatHandler.Health;
     }
 
     private void Update()
@@ -34,7 +34,7 @@ public class ResourceController : MonoBehaviour
             timeSinceLastChange += Time.deltaTime;
             if (timeSinceLastChange >= healthChangeDelay)
             {
-                animationHandler.InvincibilityEnd();
+                enemyanimationHandler.InvincibilityEnd();
             }
         }
     }
@@ -53,7 +53,7 @@ public class ResourceController : MonoBehaviour
 
         if (change < 0)
         {
-            animationHandler.Damage();
+            enemyanimationHandler.Damage();
 
         }
 
@@ -67,7 +67,7 @@ public class ResourceController : MonoBehaviour
 
     private void Death()
     {
-        baseController.Death();
+        enemybasecontroller.Death();
     }
 
 }
