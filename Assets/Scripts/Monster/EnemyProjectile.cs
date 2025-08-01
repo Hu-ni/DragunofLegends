@@ -2,29 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
-    public int damage = 10;
+    public int damage;
+    public void SetDamage(int damageValue)
+    {
+        damage = damageValue;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        // 플레이어 확인
         if (other.CompareTag("Player"))
         {
-            // PlayerHealth 스크립트가 있어야 함
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
-            if (player != null)
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                player.TakeDamage(damage);
+                playerHealth.TakeDamage(damage);
             }
 
-            Destroy(gameObject); // 총알 제거
+            Destroy(gameObject);
+            return;
         }
 
-        // 예: 벽과 부딪혀도 사라지게 하고 싶을 때
-        if (other.gameObject.layer == LayerMask.NameToLayer("Level"))
+        // 벽인지 확인
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Destroy(gameObject);
+            return;
         }
     }
 }

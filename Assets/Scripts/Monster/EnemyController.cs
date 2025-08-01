@@ -3,89 +3,128 @@ using UnityEngine.AI;
 
 public class EnemyController : EnemyBaseController
 {
-    private EnemyManager enemyManager;
+    [SerializeField]
     private Transform target;
-    private NavMeshAgent agent;
 
     public enum EnemyType { Melee, Ranged }
 
-    [SerializeField]
-    private EnemyType enemyType;
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private float attackRange = 5f;
+    private EnemyStatHandler statHandler;
+    private float meleeDamage;
+    private float rangedDamage;
+    private float projectileSpeed;
 
-    [SerializeField]
-    private float attackRange = 5f;
-
-    [SerializeField]
-    private GameObject projectilePrefab;
-
-    [SerializeField]
-    private Transform firePoint;
-
-    [SerializeField]
-    private float fireCooldown = 2f;
-
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float fireCooldown = 2f;
     private float fireTimer;
 
-    public void Init(EnemyManager enemyManager, Transform target)
+    protected override void Start()
     {
-        this.enemyManager = enemyManager;
-        this.target = target;
-    }
+        base.Start();
 
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
+        statHandler = GetComponent<EnemyStatHandler>();
+
+        if (statHandler != null)
+        {
+            meleeDamage = statHandler.MeleeDamage;
+            rangedDamage = statHandler.RangedDamage;
+            projectileSpeed = statHandler.ProjectileSpeed;
+        }
+
         if (agent != null)
         {
-            agent.updateRotation = false;
-            agent.updateUpAxis = false;
+            agent.speed = 3.5f; // 이동 속도 설정 (원하는 값으로)
+            if (enemyType == EnemyType.Melee)
+            {
+                agent.stoppingDistance = 0.1f;
+            }
+            else if (enemyType == EnemyType.Ranged)
+            {
+                agent.stoppingDistance = attackRange;
+            }
+        }
+
+        if (target == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                target = player.transform;
+            }
+            else
+            {
+                Debug.LogError("Target이 혹은 Player가 없습니다");
+            }
         }
     }
 
     protected override void HandleAction()
     {
-        base.HandleAction();
-
         if (target == null || agent == null)
-            return;
-
-        float distance = Vector3.Distance(transform.position, target.position);
-        Vector2 direction = (target.position - transform.position).normalized;
-        lookDirection = direction;
-
-        switch (enemyType)
         {
-            case EnemyType.Melee:
-                // NavMeshAgent가 알아서 따라가므로 별도 처리 X
-                agent.isStopped = false;
-                break;
+            isAgentMoving = false;
+            return;
+        }
 
-            case EnemyType.Ranged:
-                if (distance > attackRange)
-                {
-                    agent.isStopped = false; // 계속 접근
-                }
-                else
-                {
-                    agent.isStopped = true; // 멈추고 발사
+        // 목적지 설정
+        agent.SetDestination(target.position);
+        lookDirection = (target.position - transform.position).normalized;
 
-                    fireTimer -= Time.deltaTime;
-                    if (fireTimer <= 0f)
-                    {
-                        FireProjectile(direction);
-                        fireTimer = fireCooldown;
-                    }
-                }
-                break;
+        // 실제 거리를 계산
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+        // 공격 범위 안에 들어왔는지 여부로 isAgentMoving을 결정
+        if (distanceToTarget <= agent.stoppingDistance + 0.1f)
+        {
+            isAgentMoving = false;
+        }
+        else
+        {
+            isAgentMoving = true;
+        }
+
+        // 몬스터가 공격 범위 안에 들어오고 원거리 타입일 때만 공격
+        if (!isAgentMoving && enemyType == EnemyType.Ranged)
+        {
+            fireTimer -= Time.deltaTime;
+            if (fireTimer <= 0f)
+            {
+                FireProjectile(lookDirection);
+                fireTimer = fireCooldown;
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) // 접촉 데미지
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(meleeDamage);
+            }
         }
     }
 
-    private void FireProjectile(Vector2 direction)
+    private void FireProjectile(Vector2 direction) // 원거리 공격
     {
         if (projectilePrefab != null && firePoint != null)
         {
             GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            if (bulletRigidbody != null)
+            {
+                bulletRigidbody.velocity = direction * projectileSpeed;
+
+                // [추가] Projectile 스크립트에 데미지 전달
+                EnemyProjectile enemyprojectile = bullet.GetComponent<EnemyProjectile>();
+                if (enemyprojectile != null)
+                {
+                    enemyprojectile.damage = (int)rangedDamage; 
+                }
+            }
         }
     }
 }

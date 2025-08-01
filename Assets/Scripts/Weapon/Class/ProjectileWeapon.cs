@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class MeleeWeapon : WeaponBase
+public class ProjectileWeapon : WeaponBase
 {
-    protected float attackRange;
+    protected int projectileCounts;
+    protected float projectileSpeeds;
+    protected int penetrationCounts;
 
+    [SerializeField] public GameObject projectilePrefab;
+    [SerializeField] public Transform startPostiion;
     SpriteRenderer spriteRenderer;
-
-
-    public Vector2 boxSize = new Vector2(1f, 2f);
-    public Vector2 boxOffset = new Vector2(0.5f, 0f);
 
     private void Awake()
     {
@@ -36,9 +35,7 @@ public class MeleeWeapon : WeaponBase
         {
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
-            
     }
-
 
     private void Start()
     {
@@ -47,12 +44,11 @@ public class MeleeWeapon : WeaponBase
         attackCooltime = cooldown;
     }
 
-
     protected override void Update()
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //확인하기
         {
             Attack();
         }
@@ -62,12 +58,12 @@ public class MeleeWeapon : WeaponBase
     {
         base.SetWeaponStat(level);
 
-        MeleeWeapon_SO meleeWeaponData = weaponData as MeleeWeapon_SO;
+        ProjectileWeapon_SO projectileWeaponData = weaponData as ProjectileWeapon_SO;
 
-        attackRange = meleeWeaponData.attackRanges[level];
-
+        int projectileCounts = projectileWeaponData.projectileCounts[level];
+        float projectileSpeeds = projectileWeaponData.projectileSpeeds[level];
+        int penetrationCounts = projectileWeaponData.penetrationCounts[level];
     }
-
 
     public override void Attack()
     {
@@ -76,27 +72,23 @@ public class MeleeWeapon : WeaponBase
             return;
         }
 
-        
         LayerMask targetLayer = LayerMask.GetMask("Enemy");
 
-        Vector2 center = (Vector2)transform.position + (Vector2)(transform.right * boxOffset.x + transform.up * boxOffset.y);
+        for (int i = 0; i < projectileCounts; i++)
+        {
+            CreateProjectile();
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(center, boxSize, 0f, targetLayer);
+            Debug.Log("발사");
+            attackCooltime = cooldown;
 
-        Debug.Log("공격");
-        attackCooltime = cooldown;
-
+        }
     }
 
-    void OnDrawGizmos()
+    public void CreateProjectile()
     {
-        Vector2 center = (Vector2)transform.position + (Vector2)(transform.right * boxOffset.x + transform.up * boxOffset.y);
-
-        Gizmos.color = Color.red;
-        Gizmos.matrix = Matrix4x4.TRS(center, transform.rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+        GameObject obj = Instantiate(projectilePrefab, startPostiion.position, Quaternion.identity);
+        //ProjectileController projectileController = obj.GetComponent<ProjectileController>();
+        //projectileController.Init(direction, rangeWeaponHandler);
     }
-
-
-    
 }
+
