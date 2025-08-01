@@ -28,6 +28,6 @@ public class MonsterFactory : MonoBehaviour
         GameObject obj = Instantiate(prefabMap[id]);
         var controller = obj.GetComponent<EnemyBaseController>();
         controller?.Initialize(id, pool);
-        return Instantiate(prefabMap[id]);
+        return obj;
     }
 }
