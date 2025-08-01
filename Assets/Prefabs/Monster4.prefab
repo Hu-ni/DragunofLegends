@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1926810196677066677}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.56, y: 1.78, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0b1d37cc148b64fba88776246ab2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 2615965096290574734}
-  enemyType: 0
+  characterRenderer: {fileID: 0}
+  enemyType: 1
   attackRange: 5
   projectilePrefab: {fileID: 5188572181617536325, guid: 28c161c709c162246bfa8ab3a1854b6c, type: 3}
   firePoint: {fileID: 3160005920719730546}

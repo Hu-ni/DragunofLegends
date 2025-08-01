@@ -21,7 +21,6 @@ public class EnemyBaseController : MonoBehaviour
     protected EnemyStatHandler enemystatHandler;
 
     protected bool isAttacking;
-    private float timeSinceLastAttack = float.MaxValue;
 
     protected bool useAgentMovement = false;
     protected NavMeshAgent agent;
