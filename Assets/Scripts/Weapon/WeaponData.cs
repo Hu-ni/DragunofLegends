@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Weapon Data")]
 public class WeaponData : ScriptableObject
 {
-    public int[] level; //현재 레벨
+    public int[] level;
     public WeaponType weaponType; //무기 종류
     public int[] weaponDamage; //무기공격력
     public float[] fireRate; //연사속도
@@ -16,4 +16,5 @@ public class WeaponData : ScriptableObject
     public int[] penetrateNum; //관통 횟수
     public float[] critRate; //치명타 확률
     public float[] critdamage; //치명타 데미지
+    public bool[] maxlevel; //최고강화인지
 }

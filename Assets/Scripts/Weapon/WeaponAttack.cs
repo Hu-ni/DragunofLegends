@@ -21,9 +21,12 @@ public class WeaponAttack : MonoBehaviour
                 break;
         }
     }
-    public void StraightAttack()
+    public void StraightAttack(/*Vector3 lookdirection*/)
     {
-
+        //방향을 받아서 그 방향에 직선형 투사체 발사
+        //공격시 무기 공격 애니메이션 작동
+        //맞는 경우는 따로 OnAttack으로 만들면 될듯?
+        
     }
 
     public void AreaAttack()
