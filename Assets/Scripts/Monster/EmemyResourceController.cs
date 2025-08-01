@@ -39,7 +39,7 @@ public class EnemyResourceController : MonoBehaviour
         }
     }
 
-    public bool ChangeHealth(float change)
+    public bool ChangeHealth(float change) // 플레이어의 공격을 여기에 연결해서 몬스터한테 데미지
     {
         if (change == 0 || timeSinceLastChange < healthChangeDelay)
         {

@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public int damage = 10;
+    public int damage;
+    public void SetDamage(int damageValue)
+    {
+        damage = damageValue;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        // 플레이어 확인
         if (other.CompareTag("Player"))
         {
-            // PlayerHealth 스크립트가 있어야 함
-            PlayerHealth player = other.GetComponent<PlayerHealth>();
-            if (player != null)
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
             {
-                player.TakeDamage(damage);
+                playerHealth.TakeDamage(damage);
             }
 
             Destroy(gameObject);
+            return;
         }
 
-        // 벽과 부딪히면 삭제
+        // 벽인지 확인
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Destroy(gameObject);
+            return;
         }
     }
 }
