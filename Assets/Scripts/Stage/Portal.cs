@@ -8,8 +8,8 @@ using UnityEngine;
 
 public class Portal: MonoBehaviour
 {
-    private const string ClosePortal = "ClosePortal";
-    private const string EnablePortal = "isClear";
+    private static readonly int ClosePortal = Animator.StringToHash("ClosePortal");
+    private static readonly int EnablePortal = Animator.StringToHash("isClear");
 
     private const string PlayerTag = "Player";
 
@@ -37,7 +37,7 @@ public class Portal: MonoBehaviour
         {
             isClear = false;
             _anim.SetTrigger(ClosePortal);
-            StageManager.Instance.CreateStage();
+            GameManager.instance.ClearStage();
         }
     }
 }

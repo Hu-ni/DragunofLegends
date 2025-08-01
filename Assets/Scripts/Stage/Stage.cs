@@ -13,6 +13,5 @@ public class Stage : ScriptableObject
 
     public GameObject Stg { get { return _stage; } }
     public List<GameObject> Monsters { get { return _monsters; } }
-
-
 }
+
