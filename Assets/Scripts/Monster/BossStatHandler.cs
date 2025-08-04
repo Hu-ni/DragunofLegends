@@ -4,45 +4,50 @@ using UnityEngine;
 
 public class BossStatHandler : MonoBehaviour
 {
-    public float maxHealth = 500;
-    public float currentHealth;
-    public float chargeDamage = 30;
-    public float rangedDamage = 15;
-    public float contecDamage = 10;
     [SerializeField]
-    private float invincibilityDuration = 0.5f;
-    private float invincibilityTimer = 0f;
+    private float bossMaxHealth = 500;
+    [SerializeField]
+    private float bossCurrentHealth;
+    public float BossCurrentHealth
+    {
+        get => bossCurrentHealth;
+        set => bossCurrentHealth = Mathf.Clamp(value, 0, 500);
+    }
+
+    [SerializeField]
+    private float bossChargeDamage = 30;
+    public float BossChargeDamage => bossChargeDamage;
+
+    [SerializeField]
+    private float bossRangedDamage = 15;
+    public float BossRangedDamage => bossRangedDamage;
+
+    [SerializeField]
+    private float bossContactDamage = 10;
+    public float BossContactDamage => bossContactDamage;
+
+    [SerializeField]
+    private float bossprojectileSpeed = 10f;
+    public float BossProjectileSpeed => bossprojectileSpeed;
+
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        BossCurrentHealth = bossMaxHealth;
     }
     private void Update()
     {
-        if (invincibilityTimer > 0)
-        {
-            invincibilityTimer -= Time.deltaTime;
-        }
+
     }
 
     public void TakeDamage(float damage)
     {
-        // 무적 시간이 아닐 때만 데미지를 입도록
-        if (invincibilityTimer > 0)
+        BossCurrentHealth -= damage;
+        Debug.Log("Player took " + damage + " damage. Current health: " + BossCurrentHealth);
+
+        if (BossCurrentHealth <= 0)
         {
-            Debug.Log("Player is invincible!");
-            return;
-        }
-
-        currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
-
-        // 데미지를 입은 후 무적 시간 시작
-        invincibilityTimer = invincibilityDuration;
-
-        if (currentHealth <= 0)
-        {
-            // 죽음 애니메이션
+            // 죽음 관리 // 애니메이션
         }
     }
 }

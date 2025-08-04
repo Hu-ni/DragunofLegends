@@ -119,6 +119,8 @@ GameObject:
   - component: {fileID: 2005689125824442981}
   - component: {fileID: 7960726492371291592}
   - component: {fileID: 2101900795924600953}
+  - component: {fileID: 5295917223019807060}
+  - component: {fileID: 4110807176088691009}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -241,6 +243,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpriteObject: {fileID: 685662632446464317}
+--- !u!114 &5295917223019807060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342307015160876774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea5e9e81740c5c488b9c66e1f9c533c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  smoothSpeed: 0.125
+  fixedXPosition: 0
+  minYPosition: -10
+  maxYPosition: 10
+--- !u!114 &4110807176088691009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342307015160876774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f616a988955c7764a950822cbb3d613d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincibilityDuration: 0.5
 --- !u!1 &2594361244906566736
 GameObject:
   m_ObjectHideFlags: 0

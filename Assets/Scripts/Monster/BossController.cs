@@ -1,98 +1,179 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; // NavMeshAgent 사용을 위해 추가
 
 public class BossController : MonoBehaviour
 {
-    public enum BossState { Idle, Attack, Dead }
-    public BossState currentState;
+    [Header("몬스터 움직임")]
+    [SerializeField] private float chaseRange = 5f;
+    [SerializeField] private float moveSpeed = 3f;
+    private Transform player;
+    private Rigidbody2D rb;
+    private Vector2 movement;
 
-    [SerializeField] private BossStatHandler bossStatsHandler;
-    [SerializeField] private BossPatterns bossPatterns;
+    [Header("패턴 제어")]
+    [SerializeField] private float rangedAttackInterval = 3f; // 원거리 공격 쿨타임
+    [SerializeField] private float patternCooldown = 10f; // 패턴 쿨타임
+    private float lastAttackTime;
+    private float lastPatternTime;
 
-    private NavMeshAgent agent;
-    private Transform playerTarget;
+    private bool isPatternActive = false;
 
-    private int currentPhase = 0;
+    private float bossContactDamage;
+    private float bossRangedDamage;
+    private float bossprojectileSpeed;
+    private BossStatHandler bossStatHandler;
 
-    void Start()
+    [Header("원거리 공격")]
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform firePoint;
+
+    private BossPatterns bossPatterns;
+    private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        if (agent == null)
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        lastAttackTime = Time.time;
+        lastPatternTime = Time.time;
+
+        // BossStatHandler와 BossPatterns 컴포넌트 가져오기
+        bossStatHandler = GetComponent<BossStatHandler>();
+        bossPatterns = GetComponent<BossPatterns>();
+
+        if (bossStatHandler != null)
         {
-            Debug.LogError("NavMeshAgent 컴포넌트가 없습니다!");
-            return;
+            bossContactDamage = bossStatHandler.BossContactDamage;
+            bossRangedDamage = bossStatHandler.BossRangedDamage;
+            bossprojectileSpeed = bossStatHandler.BossProjectileSpeed;
         }
 
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
-
-        playerTarget = GameObject.FindGameObjectWithTag("Player").transform;
-
-        currentState = BossState.Idle;
-        bossPatterns.onPatternFinished += OnPatternFinished;
+        // 패턴이 끝났을 때 BossController에 알리도록 이벤트 구독
+        if (bossPatterns != null)
+        {
+            bossPatterns.onPatternFinished += OnPatternFinished;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (bossPatterns != null)
+        {
+            bossPatterns.onPatternFinished -= OnPatternFinished;
+        }
     }
 
-    void Update()
+    private void Update()
     {
-        if (currentState == BossState.Dead) return;
-
-        // 보스 체력에 따라 페이즈 전환
-        if (bossStatsHandler.currentHealth <= bossStatsHandler.maxHealth * 0.5f && currentPhase < 2)
+        // 보스의 기본 움직임은 패턴 중이 아닐 때만 실행
+        if (!isPatternActive)
         {
-            Debug.Log("보스 2페이즈로 전환!");
-            currentPhase = 2;
-        }
-        else if (currentPhase == 0)
-        {
-            currentPhase = 1;
+            MoveToPlayer();
         }
 
-        // 상태에 따른 행동
-        switch (currentState)
+        // 원거리 공격 및 패턴 발동 로직
+        if (!isPatternActive)
         {
-            case BossState.Idle:
-                // Idle 상태일 때 플레이어를 추적
-                MoveToTarget();
-                break;
-            case BossState.Attack:
-                // 공격 상태일 때 패턴 실행
-                if (!bossPatterns.IsPatternRunning)
+            // 원거리 공격 쿨타임 체크
+            if (Time.time >= lastAttackTime + rangedAttackInterval)
+            {
+                StartCoroutine(TripleShotRoutine());
+                lastAttackTime = Time.time;
+            }
+
+            // 패턴 쿨타임 체크
+            if (Time.time >= lastPatternTime + patternCooldown)
+            {
+                // BossPatterns 스크립트에 패턴 실행 요청
+                if (bossPatterns != null)
                 {
-                    // 패턴이 시작되면 NavMeshAgent를 비활성화
-                    agent.enabled = false;
-                    bossPatterns.ExecutePattern(currentPhase);
+                    // isPatternActive 플래그를 true로 설정하고, BossPatterns에게 패턴 시작 명령
+                    isPatternActive = true;
+                    // 예시로 1 페이즈 패턴을 실행
+                    bossPatterns.ExecutePattern(1);
                 }
-                break;
-        }
-    }
-    private void MoveToTarget()
-    {
-        // NavMeshAgent가 활성화된 상태에서만 이동
-        if (agent != null && agent.enabled && playerTarget != null)
-        {
-            agent.SetDestination(playerTarget.position);
+                lastPatternTime = Time.time;
+            }
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!isPatternActive)
+        {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        }
+    }
+    private void MoveToPlayer()
+    {
+        if (player != null)
+        {
+            Vector3 direction = player.position - transform.position;
+            float distance = direction.magnitude;
+
+            if (distance <= chaseRange)
+            {
+                movement = direction.normalized;
+            }
+            else
+            {
+                movement = Vector2.zero;
+            }
+        }
+    }
+
+    // 접촉 데미지
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(bossContactDamage);
+            }
+        }
+    }
+
+    // 원거리 공격
+    void RangedAttack()
+    {
+        {
+            if (projectilePrefab != null && firePoint != null)
+            {
+                StartCoroutine(TripleShotRoutine());
+            }
+        }
+    }
+    IEnumerator TripleShotRoutine()
+    {
+        Vector2 direction = (player.position - firePoint.position).normalized;
+        FireProjectile(direction);
+        yield return new WaitForSeconds(0.2f);
+        FireProjectile(direction);
+        yield return new WaitForSeconds(0.2f);
+        FireProjectile(direction);
+    }
+
+    private void FireProjectile(Vector2 direction)
+    {
+        if (projectilePrefab != null && firePoint != null)
+        {
+            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+            Rigidbody2D bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            if (bulletRigidbody != null)
+            {
+                bulletRigidbody.velocity = direction * bossprojectileSpeed;
+                EnemyProjectile enemyprojectile = bullet.GetComponent<EnemyProjectile>();
+                if (enemyprojectile != null)
+                {
+                    enemyprojectile.damage = (int)bossRangedDamage;
+                }
+            }
+        }
+    }
+
+    // BossPatterns에서 패턴이 끝났을 때 호출되는 메서드
     private void OnPatternFinished()
     {
-        currentState = BossState.Idle;
-
-        if (agent != null)
-        {
-            agent.enabled = true;
-        }
-    }
-
-    private void SetAttackState()
-    {
-        currentState = BossState.Attack;
-    }
-
-    void OnDestroy()
-    {
-        bossPatterns.onPatternFinished -= OnPatternFinished;
+        isPatternActive = false;
+        Debug.Log("패턴이 끝났음을 감지, 보스 컨트롤러가 다시 행동합니다.");
     }
 }
