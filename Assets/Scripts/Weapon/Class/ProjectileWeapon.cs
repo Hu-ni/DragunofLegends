@@ -26,9 +26,9 @@ public class ProjectileWeapon : WeaponBase
             weaponSprite = weaponData.weaponSprites[0];
         }
 
-        if (weaponAnimator == null)
+        if (effectAnimator == null)
         {
-            weaponAnimator = weaponData.weaponAnimator;
+            effectAnimator = GetComponentInChildren<Animator>();
         }
 
         if (spriteRenderer == null)
