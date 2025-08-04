@@ -10,7 +10,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected WeaponBase_SO weaponData;
 
     protected float damage;
-    protected float cooldown;
+    public float cooldown;
     protected float criticalChance;
 
     protected Sprite weaponSprite;
@@ -37,5 +37,7 @@ public abstract class WeaponBase : MonoBehaviour
         {
             return;
         }
+
+        attackCooltime = cooldown;
     }
 }

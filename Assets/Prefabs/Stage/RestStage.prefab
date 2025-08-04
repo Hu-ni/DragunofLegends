@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawningPools: []
   _waves: []
-  spawnTiming: 0.2
+  _portal: {fileID: 2178239199016018425}
 --- !u!1 &6831349150006456473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,6 +2383,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}
+--- !u!114 &2178239199016018425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8546780208724411768, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}
+  m_PrefabInstance: {fileID: 7540972270822745217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4334b94bf46784a964284a41aff229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2512930957753574822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5366411930142376231, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}
@@ -2439,6 +2450,18 @@ PrefabInstance:
     - target: {fileID: 6950343268771181463, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
       propertyPath: m_Name
       value: Altar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

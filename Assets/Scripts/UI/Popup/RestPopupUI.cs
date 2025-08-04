@@ -31,7 +31,8 @@ public class RestPopupUI : PopupUI
 
         yesButton.onClick.AddListener(() =>
         {
-            Debug.Log("회복 연결시켜야함");
+            PlayerManager.Instance.OnRestHealth(20);
+            UIManager.Instance.ClosePopupUI();
         });
 
         noButton.onClick.AddListener(() =>

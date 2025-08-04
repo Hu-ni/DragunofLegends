@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
     public static LevelManager Instance => _instance;
 
-    private int _level;
+    private int _level = 1;
     public int Level => _level;
 
     private int exp;
@@ -41,7 +42,9 @@ public class LevelManager : MonoBehaviour
         {
             LevelUP();
         }
-        float percent = exp / maxExp;
+
+        float percent = exp > 0 ? exp / (float)maxExp : 0;
+        Debug.Log($"{exp}, {maxExp}, {percent}");
         UIManager.Instance.SetExp(percent);
     }
 
@@ -54,7 +57,10 @@ public class LevelManager : MonoBehaviour
     public void LevelUP()
     {
         exp -= GetExpToNextLevel();
+
+        _level++;
         UIManager.Instance.UpdateLevel(Level);
-        UIManager.Instance.ShowPopupUI<LevelUpPopupUI>();
+        PlayerManager.Instance.LevelUpWeapon(_level);
+        //UIManager.Instance.ShowPopupUI<LevelUpPopupUI>();
     }
 }

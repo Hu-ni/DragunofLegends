@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1356577726620143246}
   - component: {fileID: 5498720712912538405}
   - component: {fileID: 2620414268897184462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbff9ed41e8815e49a541da51bc296bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  maxHealth: 10
   meleeDamage: 10
   rangedDamage: 5
   projectileSpeed: 10
@@ -162,7 +162,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1690896413722451537}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.78
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7695718647563701055}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

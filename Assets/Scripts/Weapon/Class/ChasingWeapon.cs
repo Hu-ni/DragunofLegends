@@ -134,6 +134,14 @@ public class ChasingWeapon : WeaponBase
             return;
         }
 
+        // 너무 플레이어에서 멀리 떨어지지 않도록
+        if (rigid.velocity.magnitude > 10f)
+        {
+            target = player.transform;
+            chasingState = ChasingState.Chasing;
+            return;
+        }
+
         Vector2 dir = player.transform.position - transform.position;
         dir = dir.normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -194,6 +202,7 @@ public class ChasingWeapon : WeaponBase
 
         // enemy TakeDamage 메서드 호출
         Debug.Log("에너미와 충돌");
+        collision.GetComponent<EnemyBaseController>().Death();      // 테스트
 
     }
 }
