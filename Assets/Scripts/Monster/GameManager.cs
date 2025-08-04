@@ -25,11 +25,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (UIManager.Instance == null)
-        {
-            SceneManager.LoadScene(Constants.SceneStageUI, LoadSceneMode.Additive);
-        }
-
         //if (enemyManager != null)
         //{
         //    enemyManager.Init(this);
@@ -48,6 +43,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (UIManager.Instance == null)
+        {
+            SceneManager.LoadScene(Constants.SceneStageUI, LoadSceneMode.Additive);
+        }
         //Debug.Log("GameManager Start 메서드 호출됨!");
         //SceneManager.LoadScene(Constants.Scene_Stage_UI, LoadSceneMode.Additive);
         NextStage();    // TODO: UI 상호작용으로 이동
