@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ProjectileWeapon : WeaponBase
 {
@@ -16,7 +17,10 @@ public class ProjectileWeapon : WeaponBase
 
     [SerializeField] public GameObject projectilePrefab;
     [SerializeField] public Transform startPostiion;
+
     SpriteRenderer spriteRenderer;
+    float searchRadius = 2f;
+    Transform target;
 
     private void Awake()
     {
@@ -75,10 +79,25 @@ public class ProjectileWeapon : WeaponBase
     {
         base.Attack();
 
-        if (gameObject == null)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, searchRadius, LayerMask.GetMask("Enemy"));
+        float minDistance = float.MaxValue;
+
+        foreach (Collider2D hit in hits)
         {
-            Debug.Log("발사체 프리팹 로드 실패");
-            return;
+            float dist = Vector2.Distance(transform.position, hit.transform.position);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                target = hit.transform;
+            }
+        }
+
+        if (target != null)
+        {
+            Vector2 dir = target.transform.position - transform.position;
+            dir = dir.normalized;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         CreateProjectile();

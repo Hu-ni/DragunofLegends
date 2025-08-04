@@ -1,20 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public event Action<float> OnHealthChanged;
+    private GaugeBar hpBar;
     [SerializeField]
     private float maxHealth = 100f;
     private float currentHealth;
+    public float CurrentHealth 
+    {   get { return currentHealth; }
+        set 
+        { 
+            currentHealth = Mathf.Clamp(value, 0, maxHealth);
+            OnHealthChanged?.Invoke(currentHealth / maxHealth);
+        } 
+    }
 
     [SerializeField]
     private float invincibilityDuration = 0.5f;
     private float invincibilityTimer = 0f;
 
+    private void Awake()
+    {
+        hpBar = GetComponentInChildren<GaugeBar>();
+        OnHealthChanged += hpBar.SetValue;
+    }
+
     private void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
     private void Update()
     {
@@ -33,8 +50,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        currentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
+        CurrentHealth -= damage;
+        Debug.Log("Player took " + damage + " damage. Current health: " + CurrentHealth);
 
         // 데미지를 입은 후 무적 시간 시작
         invincibilityTimer = invincibilityDuration;
