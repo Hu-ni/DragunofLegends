@@ -146,7 +146,6 @@ MonoBehaviour:
   target: {fileID: 0}
   enemyType: 0
   attackRange: 5
-  meleeDamage: 10
   projectilePrefab: {fileID: 0}
   firePoint: {fileID: 0}
   fireCooldown: 2
@@ -163,6 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  meleeDamage: 10
+  rangedDamage: 5
+  projectileSpeed: 10
 --- !u!195 &4759795769164181308
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -211,7 +213,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7476557763953935961
 BoxCollider2D:
   m_ObjectHideFlags: 0

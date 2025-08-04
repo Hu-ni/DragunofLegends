@@ -118,7 +118,7 @@ public class EnemyController : EnemyBaseController
             {
                 bulletRigidbody.velocity = direction * projectileSpeed;
 
-                // [추가] Projectile 스크립트에 데미지 전달
+                // Projectile 스크립트에 데미지 전달
                 EnemyProjectile enemyprojectile = bullet.GetComponent<EnemyProjectile>();
                 if (enemyprojectile != null)
                 {
