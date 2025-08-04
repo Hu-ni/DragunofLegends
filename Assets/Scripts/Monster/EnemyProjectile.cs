@@ -13,7 +13,7 @@ public class EnemyProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // 플레이어 확인
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(Constants.PlayerTag))
         {
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
