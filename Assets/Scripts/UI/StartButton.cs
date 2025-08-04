@@ -22,24 +22,23 @@ public class StartButton : MonoBehaviour
         }
 
         //Debug.Log("게임 시작 연결필요");
-        GameObject sceneData = new GameObject();
+         
         if (buttonContainer.SelectedIndex == 0)
         {
-            sceneData.name = "Melee";
+            GameAlwaysData.Instance.SelectedWeapon = "MeleeWeapon";
         }
         else if (buttonContainer.SelectedIndex == 1)
         {
-            sceneData.name = "Projectile";
+            GameAlwaysData.Instance.SelectedWeapon = "ProjectileWeapon";
         }
         else if ( buttonContainer.SelectedIndex == 2)
         {
-            sceneData.name = "Chasing";
+            GameAlwaysData.Instance.SelectedWeapon = "ChasingWeapon";
         }
         else
         {
             Debug.Log("무기가 선택되지 않음");
         }
-        DontDestroyOnLoad(sceneData);
         SceneManager.LoadScene("Stage");
 
     }
