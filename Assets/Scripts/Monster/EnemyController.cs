@@ -5,7 +5,6 @@ public class EnemyController : EnemyBaseController
 {
     [SerializeField]
     private Transform target;
-
     public enum EnemyType { Melee, Ranged }
 
     [SerializeField] private EnemyType enemyType;
@@ -20,9 +19,13 @@ public class EnemyController : EnemyBaseController
     [SerializeField] private float fireCooldown = 2f;
     private float fireTimer;
 
+    protected EnemyAnimationHandler enemyAnimationHandler;
+
     protected override void Awake()
     {
         base.Awake();
+
+        enemyAnimationHandler = GetComponent<EnemyAnimationHandler>();
     }
 
     protected override void Start()
@@ -70,6 +73,7 @@ public class EnemyController : EnemyBaseController
         if (target == null || agent == null)
         {
             isAgentMoving = false;
+            enemyAnimationHandler.Move(Vector2.zero); // 멈췄을 때 애니메이션
             return;
         }
 
@@ -88,6 +92,15 @@ public class EnemyController : EnemyBaseController
         else
         {
             isAgentMoving = true;
+        }
+
+        if (isAgentMoving)
+        {
+            enemyAnimationHandler.Move(agent.velocity.normalized);
+        }
+        else
+        {
+            enemyAnimationHandler.Move(Vector2.zero);
         }
 
         // 몬스터가 공격 범위 안에 들어오고 원거리 타입일 때만 공격
