@@ -2451,6 +2451,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Altar
       objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621421794740383118, guid: c8ad5cad2181f7b49b9883f0f46ebc49, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
