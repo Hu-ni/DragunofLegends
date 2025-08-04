@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class ProjectileWeapon : WeaponBase
 {
-    protected int projectileCounts;
-    protected float projectileSpeeds;
-    protected int penetrationCounts;
+    protected int projectileCount;
+    public int ProjectileCount { get { return projectileCount; } }
+
+    protected float projectileSpeed;
+    public float ProjectileSpeed { get { return projectileSpeed; } }
+
+    protected int penetrationCount;
+    public int PenetrationCount { get { return penetrationCount; } }
+
 
     [SerializeField] public GameObject projectilePrefab;
     [SerializeField] public Transform startPostiion;
@@ -48,7 +54,7 @@ public class ProjectileWeapon : WeaponBase
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Space)) //확인하기
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Attack();
         }
@@ -60,33 +66,30 @@ public class ProjectileWeapon : WeaponBase
 
         ProjectileWeapon_SO projectileWeaponData = weaponData as ProjectileWeapon_SO;
 
-        int projectileCounts = projectileWeaponData.projectileCounts[level];
-        float projectileSpeeds = projectileWeaponData.projectileSpeeds[level];
-        int penetrationCounts = projectileWeaponData.penetrationCounts[level];
+        projectileCount = projectileWeaponData.projectileCounts[level];
+        projectileSpeed = projectileWeaponData.projectileSpeeds[level];
+        penetrationCount = projectileWeaponData.penetrationCounts[level];
     }
 
     public override void Attack()
     {
-        if (attackCooltime > 0f)
+        base.Attack();
+
+        if (gameObject == null)
         {
+            Debug.Log("발사체 프리팹 로드 실패");
             return;
         }
 
-        LayerMask targetLayer = LayerMask.GetMask("Enemy");
-
-        for (int i = 0; i < projectileCounts; i++)
-        {
-            CreateProjectile();
-
-            Debug.Log("발사");
-            attackCooltime = cooldown;
-
-        }
+        CreateProjectile();
+        
     }
 
     public void CreateProjectile()
     {
         GameObject obj = Instantiate(projectilePrefab, startPostiion.position, Quaternion.identity);
+        Projectile projectile = obj.GetComponent<Projectile>();
+        projectile.Initialize(this, transform.right);
         //ProjectileController projectileController = obj.GetComponent<ProjectileController>();
         //projectileController.Init(direction, rangeWeaponHandler);
     }

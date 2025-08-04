@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0826cfac24a97fd4b8e54d3202a42f32, type: 3}
-  m_Name: ProjectileWeaponData
+  m_Script: {fileID: 11500000, guid: 3ae994214c257be46aaada1eef9a70ef, type: 3}
+  m_Name: ChasingWeapon01
   m_EditorClassIdentifier: 
   damages:
   - 10
@@ -19,25 +19,24 @@ MonoBehaviour:
   - 40
   - 50
   cooldowns:
-  - 1.5
-  - 1.3
-  - 1.1
-  - 0.9
-  - 0.7
+  - 0.3
+  - 0.25
+  - 0.2
+  - 0.15
+  - 0.1
   criticalChances:
-  - 10
-  - 20
-  - 30
-  - 40
-  - 50
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
   weaponSprites:
-  - {fileID: 1492607044, guid: c5581934eb245cf4697ccb90e2055bcd, type: 3}
+  - {fileID: 1377698352, guid: 414f7fd86f229044eac925414d2ec626, type: 3}
   effectAnimation: {fileID: 0}
   projectileCounts: 0100000001000000010000000100000001000000
   projectileSpeeds:
   - 2
-  - 2
-  - 2
   - 3
-  - 3
-  penetrationCounts: 0100000001000000020000000200000003000000
+  - 4
+  - 5
+  - 6

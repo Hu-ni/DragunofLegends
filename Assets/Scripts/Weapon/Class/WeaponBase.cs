@@ -31,5 +31,11 @@ public abstract class WeaponBase : MonoBehaviour
         criticalChance = weaponData.criticalChances[level];
     }
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        if (attackCooltime > 0f)
+        {
+            return;
+        }
+    }
 }

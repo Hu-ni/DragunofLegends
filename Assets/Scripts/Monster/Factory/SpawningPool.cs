@@ -12,6 +12,12 @@ public class SpawningPool : MonoBehaviour
 
     // 풀링 큐
     private Dictionary<int,Queue<GameObject>> _pool = new();
+    private Stage _stage;
+
+    public void Initialize(Stage stage)
+    {
+        _stage = stage;
+    }
 
     // 풀링 메소드
     public GameObject GetMonster(int id, Transform trans)
@@ -33,9 +39,9 @@ public class SpawningPool : MonoBehaviour
     // 만약 Wave를 각 스포닝풀마다 저장할경우
     // 현재 순서를 체크할 인덱스 생성
     // GetMosnter에 id를 제거한 후 WaveInfo 안에 있는 id만 사용
-
     public void ReturnMonster(int id, GameObject monster)
     {
         _pool[id].Enqueue(monster);
+        _stage.UpdateMonsterCount();
     }
 }
