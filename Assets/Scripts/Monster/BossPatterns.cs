@@ -10,12 +10,12 @@ public class BossPatterns : MonoBehaviour
     [Header("소환")]
     [SerializeField] private List<GameObject> monsterPrefabs; // 소환할 프리팹 목록
     [SerializeField] private int summonCount = 3; // 소환할 몬스터 수
-    [SerializeField] private float summonRadius = 5f; // 보스 주변 소환 반경
+    [SerializeField] private float summonRadius = 3f; // 보스 주변 소환 반경
 
     [Header("돌진")]
     [SerializeField] private float chargeSpeed = 10f; // 돌진 속도
     [SerializeField] private float chargeDuration = 1.5f; // 돌진 지속 시간
-    [SerializeField] private float chargeCooldown = 3f; // 돌진 후 쿨타임
+    [SerializeField] private float chargeCooldown = 1f; // 돌진 후 쿨타임
 
     private Rigidbody2D rb;
     private Transform player;
@@ -30,7 +30,6 @@ public class BossPatterns : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // BossController가 이 메서드를 호출하여 패턴을 실행
     public void ExecutePattern(int phase)
     {
         if (IsPatternRunning) return;
@@ -45,7 +44,7 @@ public class BossPatterns : MonoBehaviour
             case 2:
                 StartCoroutine(Phase2Routine());
                 break;
-            default: // 기본 패턴 (여기서는 아무것도 하지 않음)
+            default: // 기본 패턴
                 FinishPattern();
                 break;
         }
@@ -102,7 +101,7 @@ public class BossPatterns : MonoBehaviour
         FinishPattern();
     }
 
-    // 패턴 종료 로직을 한 곳에서 관리하는 메서드
+    // 패턴 종료
     private void FinishPattern()
     {
         IsPatternRunning = false;
