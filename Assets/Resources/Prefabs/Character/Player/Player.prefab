@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5497713869698540994}
   - component: {fileID: 9133082339602071020}
   - component: {fileID: 4497709649399021986}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2101900795924600953}
   - component: {fileID: 5797491726238002744}
   - component: {fileID: 2080589367340940058}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0025168657, y: -0.000062942505}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.4}
+  m_Size: {x: 0.874588, y: 0.63745666}
   m_EdgeRadius: 0
 --- !u!50 &2005689125824442981
 Rigidbody2D:
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 6028364388042320486}
   - component: {fileID: 712664273966813625}
   - component: {fileID: 449882431733724299}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: GaugeBarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8233846515115098709}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: weaponpivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8550733690876100958}
   - component: {fileID: 951253301321574709}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: GaugeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7463504518098278752}
   - component: {fileID: 4314306176758439114}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: HpBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 4043150641786046241}
   - component: {fileID: 6340053078186389305}
   - component: {fileID: 2841266115931069049}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: GaugeBarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -194,6 +194,7 @@ public class ChasingWeapon : WeaponBase
 
         // enemy TakeDamage 메서드 호출
         Debug.Log("에너미와 충돌");
+        collision.GetComponent<EnemyBaseController>().Death();      // 테스트
 
     }
 }
