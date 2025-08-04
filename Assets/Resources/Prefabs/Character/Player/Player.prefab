@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 7960726492371291592}
   - component: {fileID: 2101900795924600953}
   - component: {fileID: 5797491726238002744}
+  - component: {fileID: 2080589367340940058}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -260,6 +261,20 @@ MonoBehaviour:
   - {fileID: 5405473627746482035, guid: ca331acf4254f7042bd2b048b0f72e26, type: 3}
   - {fileID: 3963515031467397169, guid: 9e38059b9eee1a7488c8ef1d0450cf18, type: 3}
   rotationRadius: 2
+--- !u!114 &2080589367340940058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342307015160876774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f616a988955c7764a950822cbb3d613d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincibilityDuration: 0.5
 --- !u!1 &2594361244906566736
 GameObject:
   m_ObjectHideFlags: 0
