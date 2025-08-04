@@ -20,7 +20,7 @@ public class SpawningPool : MonoBehaviour
     }
 
     // 풀링 메소드
-    public GameObject GetMonster(int id, Transform trans)
+    public GameObject GetMonster(int id, Transform trans, int stageLevel)
     {
         if(!_pool.ContainsKey(id)) _pool[id] = new Queue<GameObject>();
 
@@ -32,7 +32,10 @@ public class SpawningPool : MonoBehaviour
         else
             monster = _factory.CreateMonster(id, this);
 
-        monster.GetComponent<EnemyBaseController>().Spawn(trans);
+        EnemyBaseController enemy = monster.GetComponent<EnemyBaseController>();
+        enemy.SetStageLevel(stageLevel);
+        enemy.Spawn(trans);
+
         return monster;
     }
 

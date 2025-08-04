@@ -93,11 +93,15 @@ public class StageManager : MonoBehaviour
 
     public void SpawnMonster()
     {
-        _currStage.Execute();
+        _currStage.Execute(currentStageIdx);
     }
 
-    public void ClearStage()
+    public void CheckClearStage()
     {
-        _currStage.ClearStage();
+        if(_currStage.isClear)
+        {
+            _currStage.ClearStage();
+
+        }
     }
 }

@@ -10,7 +10,7 @@ public class ToggleButton : MonoBehaviour
     [SerializeField]
     Image frame;
 
-    ToggleButtonList toggleButtonList;
+    ToggleButtonContainer toggleButtonList;
 
     bool isSelected = false;
 
@@ -28,7 +28,7 @@ public class ToggleButton : MonoBehaviour
 
         if (toggleButtonList == null)
         {
-            toggleButtonList = GetComponentInParent<ToggleButtonList>();
+            toggleButtonList = GetComponentInParent<ToggleButtonContainer>();
         }
     }
 

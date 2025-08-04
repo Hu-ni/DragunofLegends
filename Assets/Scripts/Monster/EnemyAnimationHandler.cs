@@ -11,7 +11,7 @@ public class EnemyAnimationHandler : MonoBehaviour
 
     protected virtual void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void Move(Vector2 obj)
