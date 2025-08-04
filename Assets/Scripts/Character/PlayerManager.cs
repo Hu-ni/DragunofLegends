@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private AutoWeaponController _autoWeapon;
     [SerializeField]
-    private PlayerControl _player;
+    private PlayerHealth _health;
 
     private WeaponBase _currWeapon;
 
@@ -37,5 +37,10 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("LevelUP");
         _currWeapon.SetWeaponStat(level);
+    }
+
+    public void OnRestHealth(int amount)
+    {
+        _health.CurrentHealth = _health.CurrentHealth + amount;
     }
 }
