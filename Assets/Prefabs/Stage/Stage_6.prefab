@@ -3899,7 +3899,7 @@ MonoBehaviour:
   - {fileID: 2719989190618495851}
   _waves:
   - {fileID: 11400000, guid: 2723fd0f2b0fadc418f6fe981fb44a5d, type: 2}
-  spawnTiming: 0.2
+  _portal: {fileID: 5540684506727970411}
 --- !u!1 &8075235645218662587
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,6 +4059,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}
+--- !u!114 &5540684506727970411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8546780208724411768, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}
+  m_PrefabInstance: {fileID: 4213175050512921363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4334b94bf46784a964284a41aff229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8070845622410965556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5366411930142376231, guid: 0a6e9947ae771f343b2d10883bf18e94, type: 3}

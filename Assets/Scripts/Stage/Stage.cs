@@ -17,7 +17,7 @@ public class Stage : MonoBehaviour
     private List<SpawningPool> _spawningPools = new();
     [SerializeField]
     private List<WaveInfo> _waves = new();
-
+    [SerializeField]
     private Portal _portal;
 
     private int _aliveMonsters = 0;
