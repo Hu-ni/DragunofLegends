@@ -65,6 +65,10 @@ public class GaugeBar_HUD : MonoBehaviour
         }
 
     }
-    
+
+    public void SetValue(float value)
+    {
+        gaugeBar.SetValue(value);
+    }
 
 }

@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 630437105}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2158313, y: 5.3524785, z: -4.2241383}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -385,21 +385,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 9178002136627635288, guid: c456b207ad654594f82b213a410517ce, type: 3}
-  - {fileID: 395980597792685103, guid: 65cf0da93ae49cb45aa6138b08f78227, type: 3}
-  - {fileID: 8071962278573893537, guid: e8c67a008fd3a7847aefdc51b73f42e4, type: 3}
-  - {fileID: 3604390879429864240, guid: 9a86cfdc5cca04f488d4980702d62bce, type: 3}
+  - {fileID: 3378612184340842580, guid: c456b207ad654594f82b213a410517ce, type: 3}
+  - {fileID: 1556446735432576162, guid: 65cf0da93ae49cb45aa6138b08f78227, type: 3}
+  - {fileID: 1690896413722451537, guid: e8c67a008fd3a7847aefdc51b73f42e4, type: 3}
+  - {fileID: 1926810196677066677, guid: 9a86cfdc5cca04f488d4980702d62bce, type: 3}
+  - {fileID: 2635761931643665756, guid: f94fd697c113ab640897964f8b81571a, type: 3}
   spawnAreas:
   - serializedVersion: 2
-    x: 2.27
-    y: -2.44
-    width: 5
-    height: 5
+    x: 3.24
+    y: -3.39
+    width: 5.84
+    height: 6.75
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
   timeBetweenSpawns: 0.01
   timeBetweenWaves: 0.1
   numberOfEnemiesToSpawn: 4
-  playerTransform: {fileID: 0}
 --- !u!4 &1978426528
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ Transform:
   m_GameObject: {fileID: 1978426526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.3389099, y: -0.033346802, z: -4.165374}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
