@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8059685658374968329}
   - component: {fileID: 1321642028444197233}
   m_Layer: 0
-  m_Name: ChasingWeapon01
+  m_Name: ChasingWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
