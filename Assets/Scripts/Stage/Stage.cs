@@ -21,6 +21,9 @@ public class Stage : MonoBehaviour
     private Portal _portal;
 
     private int _aliveMonsters = 0;
+    private bool _endWave = false;
+
+    public bool isClear => _aliveMonsters == 0 && _endWave;
 
     private void Start()
     {
@@ -30,13 +33,14 @@ public class Stage : MonoBehaviour
         }
     }
 
-    public void Execute()
+    public void Execute(int stageLevel)
     {
-        StartCoroutine(ActiveWave());
+        StartCoroutine(ActiveWave(stageLevel));
     }
 
-    public IEnumerator ActiveWave()
+    public IEnumerator ActiveWave(int stageLevel)
     {
+        _endWave = false;
         foreach (WaveInfo wave in _waves)
         {
             //몬스터 생성 
@@ -44,7 +48,7 @@ public class Stage : MonoBehaviour
             {
                 foreach (SpawningPool pool in _spawningPools)
                 {
-                    pool.GetMonster(spawn.Id, pool.gameObject.transform);
+                    pool.GetMonster(spawn.Id, pool.gameObject.transform, stageLevel);
                     _aliveMonsters++;
                 }
                 GameManager.instance.UpdateMonsterCount(_aliveMonsters);
@@ -52,6 +56,7 @@ public class Stage : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);    // 웨이브 끝나면 1초 대기
         }
+        _endWave = true;
     }
 
     public void UpdateMonsterCount()
@@ -62,6 +67,18 @@ public class Stage : MonoBehaviour
 
     public void ClearStage()
     {
+        AttractAllExpOrbs();
         _portal.OnClear();
+    }
+
+    private void AttractAllExpOrbs()
+    {
+        ExpOrb[] allOrbs = FindObjectsOfType<ExpOrb>();
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        foreach (var orb in allOrbs)
+        {
+            orb.StartAttractToPlayer(player);
+        }
     }
 }

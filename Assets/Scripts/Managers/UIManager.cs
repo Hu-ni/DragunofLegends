@@ -95,12 +95,16 @@ public class UIManager : MonoBehaviour
 
     public void UpdateStageRound(int currentStageIdx)
     {
-        Debug.Log(currentStageIdx);
         _stageUI.UpdateStageRound(currentStageIdx);
     }
 
     public void UpdateLevel(int level)
     {
         _stageUI.UpdateLevel(level);
+    }
+
+    public void SetExp(float value)
+    {
+        _stageUI.UpdateExpBar(value);
     }
 }

@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (UIManager.Instance == null)
+        {
+            SceneManager.LoadScene(Constants.SceneStageUI, LoadSceneMode.Additive);
+        }
+
         //if (enemyManager != null)
         //{
         //    enemyManager.Init(this);
@@ -74,8 +79,9 @@ public class GameManager : MonoBehaviour
     public void UpdateMonsterCount(int count)
     {
         if (count <= 0)
-            _stage.ClearStage();
+            _stage.CheckClearStage();    //스테이지를 클리어했는지 확인하고 클리어 시 포탈 활성화
 
         UIManager.Instance.UpdateMonsterCount(count);
     }
+
 }
