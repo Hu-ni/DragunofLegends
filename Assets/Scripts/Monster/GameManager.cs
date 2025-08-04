@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,12 +8,10 @@ public class GameManager : MonoBehaviour
 
     private EnemyResourceController _playerResourceController;
 
-    [SerializeField]
-    private EnemyManager enemyManager;
+    //[SerializeField]
+    //private EnemyManager enemyManager;
     [SerializeField]
     private StageManager _stage;
-    [SerializeField]
-    private UIManager _uiManager;
 
     private void Awake()
     {
@@ -26,14 +25,14 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (enemyManager != null)
-        {
-            enemyManager.Init(this);
-        }
-        else
-        {
-            Debug.LogError("EnemyManager가할당되지 않았습니다");
-        }
+        //if (enemyManager != null)
+        //{
+        //    enemyManager.Init(this);
+        //}
+        //else
+        //{
+        //    Debug.LogError("EnemyManager가할당되지 않았습니다");
+        //}
 
         if (_stage != null)
             _stage.Initialize(this);
@@ -45,8 +44,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Debug.Log("GameManager Start 메서드 호출됨!");
+        //SceneManager.LoadScene(Constants.Scene_Stage_UI, LoadSceneMode.Additive);
         NextStage();    // TODO: UI 상호작용으로 이동
-        StartSpawnMonster();
+        //StartSpawnMonster();
     }
 
     // 몬스터 생성 시작
@@ -61,18 +61,21 @@ public class GameManager : MonoBehaviour
         // 몬스터 스폰
         // UI 업데이트
         _stage.CreateStage();
+        UIManager.Instance.UpdateStageRound(_stage.CurrentStageIdx);
+        _stage.SpawnMonster();
     }
 
     public void GameOver()
     {
-        enemyManager.StopWave();
+        UIManager.Instance.ShowPopupUI<ResultPopupUI>();
+        //enemyManager.StopWave();
     }
 
     public void UpdateMonsterCount(int count)
     {
         if (count <= 0)
             _stage.ClearStage();
-        
-        // TODO: UI 업데이트
+
+        UIManager.Instance.UpdateMonsterCount(count);
     }
 }

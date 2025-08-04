@@ -13,8 +13,6 @@ public class Portal: MonoBehaviour
 
     private const string PlayerTag = "Player";
 
-    private bool isClear = false;
-
     [SerializeField]
     private Animator _anim;
 
@@ -22,22 +20,23 @@ public class Portal: MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_EDITOR
         if (TestMode)
             OnClear();
+#endif
     }
 
     public void OnClear()
     {
-        isClear = true;
         _anim.SetTrigger(EnablePortal);
     }
     private void OnTriggerEnter2D(Collider2D e)
     {
         if (e.gameObject.tag == PlayerTag)
         {
-            isClear = false;
             _anim.SetTrigger(ClosePortal);
             GameManager.instance.NextStage();
+            e.transform.position = new Vector3(0, -3);
         }
     }
 }

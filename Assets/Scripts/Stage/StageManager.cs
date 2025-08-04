@@ -20,6 +20,7 @@ public class StageManager : MonoBehaviour
     private Dictionary<StageType, List<Stage>> _poolStage = new();    //생성된 스테이지를 랜덤으로 가져오기 위해 사용.
 
     public List<StageData> StageList { get { return _stages; } }
+    public int CurrentStageIdx { get { return currentStageIdx; } }
 
 
     void Awake()
@@ -37,8 +38,6 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         Initialize(GameManager.instance);
-        CreateStage();
-        SpawnMonster();
     }
 
 
