@@ -23,7 +23,8 @@ public class EnemyBaseController : MonoBehaviour
     protected EnemyStatHandler enemystatHandler;
 
     protected bool isAgentMoving;
-    protected bool isAttacking;
+    //protected bool isAttacking;   // 사용 안함
+    protected bool isDied = false;
 
     protected bool useAgentMovement = true;
     protected NavMeshAgent agent;
@@ -55,6 +56,8 @@ public class EnemyBaseController : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (isDied) return;
+
         HandleAction();
         Rotate(lookDirection);
         HandleAttackDelay();
@@ -74,6 +77,7 @@ public class EnemyBaseController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (isDied) return;
 
         if (knockbackDuration > 0.0f)
         {
@@ -135,13 +139,17 @@ public class EnemyBaseController : MonoBehaviour
 
     public virtual void Death()
     {
-        _rigidbody.velocity = Vector3.zero;
-        foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
-        {
-            Color color = renderer.color;
-            color.a = 0.3f;
-            renderer.color = color;
-        }
+        
+        //isDied = true;
+        // 원할한 경험을 위해 바로 삭제 처리
+        //_rigidbody.velocity = Vector3.zero;
+        //agent.velocity = Vector3.zero;
+        //foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
+        //{
+        //    Color color = renderer.color;
+        //    color.a = 0.3f;
+        //    renderer.color = color;
+        //}
         // 20250801 - PH: 코루틴 처리
         StartCoroutine(ReturnAfterDelay());
 
@@ -159,7 +167,8 @@ public class EnemyBaseController : MonoBehaviour
     private IEnumerator ReturnAfterDelay()
     {
         // 2초 대기
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0f);
+        //yield return new WaitForSeconds(2.0f);
 
         foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
         {
@@ -169,8 +178,8 @@ public class EnemyBaseController : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        //isDied = false;
         _pool.ReturnMonster(_id, gameObject);
-
         ExpOrbType type = GetDropType(_stageLevel);
 
         GameObject exp = ExpOrbPool.Instance.GetOrb(type);
