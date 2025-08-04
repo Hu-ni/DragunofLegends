@@ -7,11 +7,13 @@ public class EnemyStatHandler : MonoBehaviour
     // 몬스터 체력 // 맞은 데미지 관리는 EnemyResourceController에서
     [Range(0, 100)]
     [SerializeField]
-    private int health = 10;
+    private int maxHealth = 10;
+
+    private int currHealth;
     public int Health
     {
-        get => health;
-        set => health = Mathf.Clamp(value, 0, 100);
+        get => currHealth;
+        set => maxHealth = Mathf.Clamp(value, 0, 100);
     }
     // 근접 데미지
     [SerializeField]
@@ -27,4 +29,9 @@ public class EnemyStatHandler : MonoBehaviour
     [SerializeField]
     private float projectileSpeed = 10f;
     public float ProjectileSpeed => projectileSpeed;
+
+    private void Awake()
+    {
+        currHealth = maxHealth;
+    }
 }
