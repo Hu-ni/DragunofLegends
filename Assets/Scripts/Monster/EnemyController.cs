@@ -20,6 +20,11 @@ public class EnemyController : EnemyBaseController
     [SerializeField] private float fireCooldown = 2f;
     private float fireTimer;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -48,7 +53,7 @@ public class EnemyController : EnemyBaseController
 
         if (target == null)
         {
-            GameObject player = GameObject.FindWithTag("Player");
+            GameObject player = GameObject.FindWithTag(Constants.PlayerTag);
             if (player != null)
             {
                 target = player.transform;
@@ -98,7 +103,7 @@ public class EnemyController : EnemyBaseController
     }
     private void OnCollisionEnter2D(Collision2D collision) // 접촉 데미지
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(Constants.PlayerTag))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)

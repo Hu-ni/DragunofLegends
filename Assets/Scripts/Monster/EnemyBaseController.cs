@@ -31,6 +31,8 @@ public class EnemyBaseController : MonoBehaviour
     private int _id;
     private SpawningPool _pool;
 
+    private int _stageLevel;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -38,6 +40,7 @@ public class EnemyBaseController : MonoBehaviour
         enemystatHandler = GetComponent<EnemyStatHandler>();
 
         agent = GetComponent<NavMeshAgent>();
+
         if (agent != null)
         {
             agent.updateRotation = false;
@@ -167,11 +170,31 @@ public class EnemyBaseController : MonoBehaviour
 
         gameObject.SetActive(false);
         _pool.ReturnMonster(_id, gameObject);
+
+        ExpOrbType type = GetDropType(_stageLevel);
+
+        GameObject exp = ExpOrbPool.Instance.GetOrb(type);
+        exp.transform.position = transform.position;
+    }
+
+    ExpOrbType GetDropType(int stage)
+    {
+        if (stage < 3) return ExpOrbType.Tiny;
+        if (stage < 5) return ExpOrbType.Small;
+        if (stage < 8) return ExpOrbType.Medium;
+        if (stage < 12) return ExpOrbType.Large;
+        return ExpOrbType.Huge;
     }
 
     public void Initialize(int id, SpawningPool pool)
     {
         _id = id;
         _pool = pool;
+    }
+
+    public void SetStageLevel(int stageLevel)
+    {
+        // 스테이지에 따른 난이도 증가
+        _stageLevel = stageLevel;
     }
 }
