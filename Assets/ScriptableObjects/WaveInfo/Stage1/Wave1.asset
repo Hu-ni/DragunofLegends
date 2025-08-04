@@ -15,9 +15,11 @@ MonoBehaviour:
   _spawnSequance:
   - Id: 0
     delayAfter: 3
-  - Id: 0
+  - Id: 3
     delayAfter: 3
   - Id: 1
+    delayAfter: 3
+  - Id: 2
     delayAfter: 3
   - Id: 2
     delayAfter: 3
