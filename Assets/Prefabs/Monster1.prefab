@@ -102,7 +102,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3378612184340842580}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.81
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbff9ed41e8815e49a541da51bc296bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  maxHealth: 10
   meleeDamage: 10
   rangedDamage: 5
   projectileSpeed: 10
