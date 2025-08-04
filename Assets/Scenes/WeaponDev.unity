@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: f0f63bb66131ed0499b0c11bca88838c, type: 2}
-  AttackRangeBox: {x: 0.5, y: 1}
+  AttackBoxRange: {x: 1, y: 1}
 --- !u!4 &866297315
 Transform:
   m_ObjectHideFlags: 0
