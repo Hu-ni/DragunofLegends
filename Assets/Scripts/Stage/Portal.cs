@@ -11,8 +11,6 @@ public class Portal: MonoBehaviour
     private static readonly int ClosePortal = Animator.StringToHash("ClosePortal");
     private static readonly int EnablePortal = Animator.StringToHash("isClear");
 
-    private const string PlayerTag = "Player";
-
     [SerializeField]
     private Animator _anim;
 
@@ -32,7 +30,7 @@ public class Portal: MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D e)
     {
-        if (e.gameObject.tag == PlayerTag)
+        if (e.gameObject.tag == Constants.PlayerTag)
         {
             _anim.SetTrigger(ClosePortal);
             GameManager.instance.NextStage();
