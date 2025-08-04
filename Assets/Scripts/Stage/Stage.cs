@@ -67,8 +67,8 @@ public class Stage : MonoBehaviour
 
     public void ClearStage()
     {
-        AttractAllExpOrbs();
         _portal.OnClear();
+        AttractAllExpOrbs();
     }
 
     private void AttractAllExpOrbs()
