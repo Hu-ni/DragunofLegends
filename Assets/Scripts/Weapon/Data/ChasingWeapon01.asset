@@ -35,8 +35,8 @@ MonoBehaviour:
   effectAnimation: {fileID: 0}
   projectileCounts: 0100000001000000010000000100000001000000
   projectileSpeeds:
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
+  - 10
+  - 12
+  - 14
+  - 16
+  - 18

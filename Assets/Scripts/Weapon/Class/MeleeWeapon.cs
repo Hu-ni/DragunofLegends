@@ -78,6 +78,12 @@ public class MeleeWeapon : WeaponBase
         Collider2D[] hits = Physics2D.OverlapBoxAll(center, AttackBoxRange, 0f, targetLayer);
         effectAnimator.SetTrigger("IsAttack");
 
+        foreach(Collider2D hit in hits)
+        {
+            hit.GetComponent<EnemyBaseController>().Death();      // 테스트
+
+        }
+
         Debug.Log("공격");
 
     }
