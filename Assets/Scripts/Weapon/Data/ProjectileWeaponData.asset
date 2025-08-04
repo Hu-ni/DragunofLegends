@@ -31,9 +31,13 @@ MonoBehaviour:
   - 40
   - 50
   weaponSprites:
-  - {fileID: 0}
-  weaponAnimator: {fileID: 0}
-  effectSprites: []
-  projectileCounts: 
-  projectileSpeeds: []
-  penetrationCounts: 
+  - {fileID: 1492607044, guid: c5581934eb245cf4697ccb90e2055bcd, type: 3}
+  effectAnimation: {fileID: 0}
+  projectileCounts: 0100000001000000010000000100000001000000
+  projectileSpeeds:
+  - 2
+  - 2
+  - 2
+  - 3
+  - 3
+  penetrationCounts: 0100000001000000020000000200000003000000
