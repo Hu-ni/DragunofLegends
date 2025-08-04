@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 4559573543232324280}
   - component: {fileID: 8789791868503376105}
   - component: {fileID: 6382869986078479115}
+  - component: {fileID: 4386039722418999611}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -226,10 +227,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRange: 5
   moveSpeed: 3
-  projectilePrefab: {fileID: 5188572181617536325, guid: 28c161c709c162246bfa8ab3a1854b6c, type: 3}
-  firePoint: {fileID: 3027663433270309880}
   rangedAttackInterval: 3
   patternCooldown: 10
+  projectilePrefab: {fileID: 5188572181617536325, guid: 28c161c709c162246bfa8ab3a1854b6c, type: 3}
+  firePoint: {fileID: 3027663433270309880}
 --- !u!114 &8789791868503376105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,3 +275,24 @@ NavMeshAgent:
   m_BaseOffset: 0.25
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &4386039722418999611
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196285176263807625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b37ed66e748f5214ea50de6da78882b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
