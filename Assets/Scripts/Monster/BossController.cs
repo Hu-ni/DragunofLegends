@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossController : MonoBehaviour
 {
     [Header("몬스터 움직임")]
     [SerializeField] private float chaseRange = 5f;
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float moveSpeed = 1.5f;
     private Transform player;
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -18,7 +19,7 @@ public class BossController : MonoBehaviour
     private bool isPatternActive = false;
 
     [Header("보스 페이즈")]
-    private int _currentPhase = 2; // 1페이즈로 시작
+    private int _currentPhase = 1; // 1페이즈로 시작
 
     private float bossContactDamage;
     private float bossRangedDamage;
@@ -31,6 +32,8 @@ public class BossController : MonoBehaviour
 
     private BossPatterns bossPatterns;
 
+    protected NavMeshAgent agent;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -41,7 +44,13 @@ public class BossController : MonoBehaviour
         bossStatHandler = GetComponent<BossStatHandler>();
         bossPatterns = GetComponent<BossPatterns>();
 
-        if (bossStatHandler != null)
+        agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            agent.speed = 0.5f; // 이동 속도 설정
+        }
+            if (bossStatHandler != null)
         {
             bossContactDamage = bossStatHandler.BossContactDamage;
             bossRangedDamage = bossStatHandler.BossRangedDamage;
@@ -65,7 +74,7 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         // 2페이즈 전환 조건: 체력이 50% 이하가 되고, 아직 2페이즈가 아닐 때
-        if (bossStatHandler != null && bossStatHandler.BossCurrentHealth <= bossStatHandler.BossCurrentHealth / 2 && _currentPhase == 1)
+        if (bossStatHandler != null && bossStatHandler.BossCurrentHealth <= bossStatHandler.BossMaxHealth / 2 && _currentPhase == 1)
         {
             _currentPhase = 2;
             Debug.Log("보스가 2페이즈로 전환됩니다!");

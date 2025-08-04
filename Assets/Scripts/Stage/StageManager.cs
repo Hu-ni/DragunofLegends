@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour
 
     private GameManager _main;
 
-    private const int Max_Stage = 20;   // 마지막 스테이지는 무조건 보스
+    private const int Max_Stage = 2;   // 마지막 스테이지는 무조건 보스
     private const int Rest_Stage = 10;
 
     private int currentStageIdx = 0;

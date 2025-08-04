@@ -27,7 +27,7 @@ public class EnemyStatHandler : MonoBehaviour
 
     // 투사체 속도
     [SerializeField]
-    private float projectileSpeed = 10f;
+    private float projectileSpeed = 5f;
     public float ProjectileSpeed => projectileSpeed;
 
     private void Awake()

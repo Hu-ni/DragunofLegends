@@ -43,7 +43,7 @@ public class EnemyController : EnemyBaseController
 
         if (agent != null)
         {
-            agent.speed = 3.5f; // 이동 속도 설정 (원하는 값으로)
+            agent.speed = 2f; // 이동 속도 설정 (원하는 값으로)
             if (enemyType == EnemyType.Melee)
             {
                 agent.stoppingDistance = 0.1f;

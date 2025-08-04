@@ -7,6 +7,8 @@ public class BossStatHandler : MonoBehaviour
 {
     [SerializeField]
     private float bossMaxHealth = 500;
+    public float BossMaxHealth => bossMaxHealth;
+
     [SerializeField]
     private float bossCurrentHealth;
     public float BossCurrentHealth
@@ -42,7 +44,7 @@ public class BossStatHandler : MonoBehaviour
     public void TakeDamage(float damage)
     {
         BossCurrentHealth -= damage;
-        Debug.Log("Player took " + damage + " damage. Current health: " + BossCurrentHealth);
+        Debug.Log("보스에게 " + damage + " 데미지. 현재체력: " + BossCurrentHealth);
 
         if (BossCurrentHealth <= 0)
         {

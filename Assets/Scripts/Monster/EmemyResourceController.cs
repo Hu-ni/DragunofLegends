@@ -67,59 +67,7 @@ public class EnemyResourceController : MonoBehaviour
 
     private void Die()
     {
-        isDead = true;
-
-        if (enemyanimationHandler != null)
-        {
-            enemyanimationHandler.Die();
-        }
-
-        // 몬스터의 움직임과 공격 중지
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
-            rb.isKinematic = true;
-        }
-
-        // 충돌체 비활성화
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            collider.enabled = false;
-        }
-
-        // 몬스터 오브젝트 파괴
-        StartCoroutine(DestroyAfterAnimation());
-    }
-
-    private IEnumerator DestroyAfterAnimation()
-    {
-        float animationLength = GetAnimationClipLengthContains("die");
-
-        if (animationLength <= 0f)
-            animationLength = 2f; // 기본값
-
-        yield return new WaitForSeconds(animationLength);
         Destroy(gameObject);
-    }
-
-    private float GetAnimationClipLengthContains(string keyword)
-    {
-        if (enemyanimationHandler == null) return 0f;
-
-        RuntimeAnimatorController controller = enemyanimationHandler.AnimatorController;
-        if (controller == null) return 0f;
-
-        foreach (AnimationClip clip in controller.animationClips)
-        {
-            if (clip.name.ToLower().Contains(keyword.ToLower())) // 대소문자 무시하고 검색
-            {
-                return clip.length;
-            }
-        }
-
-        return 0f;
     }
 
 }
