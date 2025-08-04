@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4077666541037984103}
   - component: {fileID: 3391892815835007913}
   - component: {fileID: 3165854168561359927}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Monster2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6751127768089337666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
