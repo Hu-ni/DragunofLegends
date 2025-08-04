@@ -6,6 +6,7 @@ public class ProjectileWeapon : WeaponBase
 {
     protected int projectileCount;
     public int ProjectileCount { get { return projectileCount; } }
+
     protected float projectileSpeed;
     public float ProjectileSpeed { get { return projectileSpeed; } }
 
@@ -72,11 +73,7 @@ public class ProjectileWeapon : WeaponBase
 
     public override void Attack()
     {
-        if (attackCooltime > 0f)
-        {
-            return;
-        }
-
+        base.Attack();
 
         if (gameObject == null)
         {
@@ -85,7 +82,6 @@ public class ProjectileWeapon : WeaponBase
         }
 
         CreateProjectile();
-        
         
     }
 

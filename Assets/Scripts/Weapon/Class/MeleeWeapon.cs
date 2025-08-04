@@ -69,11 +69,7 @@ public class MeleeWeapon : WeaponBase
 
     public override void Attack()
     {
-        if (attackCooltime > 0f)
-        {
-            return;
-        }
-
+        base.Attack();
         
         LayerMask targetLayer = LayerMask.GetMask("Enemy");
 
