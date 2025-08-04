@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,9 @@ public class UIManager : MonoBehaviour
 
     GameObject popupRoot;
 
+    [SerializeField]
+    private StageUI _stageUI;
+
     private void Awake()
     {
         if (instance && instance != this)
@@ -24,11 +28,9 @@ public class UIManager : MonoBehaviour
         instance = this;
 
         popupRoot = GameObject.Find("PopupRoot");
-
-        
-
     }
 
+    #region 팝업UI 메소드
 
     public void InitCanvas(Canvas canvas)
     {
@@ -40,7 +42,6 @@ public class UIManager : MonoBehaviour
         canvas.sortingOrder = sortOrder;
         ++sortOrder;
     }
-
 
     public T ShowPopupUI<T>(string prefabName = null) where T : PopupUI
     {
@@ -70,7 +71,6 @@ public class UIManager : MonoBehaviour
         return popup;
     }
 
-
     public void ClosePopupUI()
     {
         if (popupStack.Count == 0)
@@ -80,5 +80,27 @@ public class UIManager : MonoBehaviour
         Destroy(popup.gameObject);
         popup = null;
         --sortOrder;
+    }
+    #endregion
+
+    public void InitStageUI()
+    {
+        _stageUI.Initialize();
+    }
+
+    public void UpdateMonsterCount(int count)
+    {
+        _stageUI.UpdateMonsterCount(count);
+    }
+
+    public void UpdateStageRound(int currentStageIdx)
+    {
+        Debug.Log(currentStageIdx);
+        _stageUI.UpdateStageRound(currentStageIdx);
+    }
+
+    public void UpdateLevel(int level)
+    {
+        _stageUI.UpdateLevel(level);
     }
 }

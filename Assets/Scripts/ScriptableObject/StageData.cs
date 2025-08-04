@@ -13,15 +13,9 @@ public class StageData : ScriptableObject
     private StageType _type;
     [SerializeField]
     private GameObject _prefabs;
-    [SerializeField]
-    private List<GameObject> _monsters = new();
-    [SerializeField]
-    private int _monstersCount = 0;
 
     public StageType Type => _type;
     public GameObject Prefabs => _prefabs;
-    public List<GameObject> Monsters => _monsters;
-    public int MonsterCount => MonsterCount;
 }
 // 1. 게임 메니저를 통해 스테이지 시작 알림
 // 2. 스테이지 활성화  --> StageManager
