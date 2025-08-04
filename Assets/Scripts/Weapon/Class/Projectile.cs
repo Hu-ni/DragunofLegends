@@ -44,6 +44,7 @@ public class Projectile : MonoBehaviour
         }
 
         Debug.Log("Enemy에 트리거");
+        collision.GetComponent<EnemyBaseController>().Death();      // 테스트
 
 
         // enemy character에서 데미지 계산
@@ -52,7 +53,7 @@ public class Projectile : MonoBehaviour
         hitCount++;
         if (hitCount > Instigator.PenetrationCount)
         {
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
         }
     }
 }
