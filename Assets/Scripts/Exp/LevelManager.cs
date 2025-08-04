@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     private static LevelManager _instance;
     public static LevelManager Instance => _instance;
 
-    private int _level;
+    private int _level = 1;
     public int Level => _level;
 
     private int exp;
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
             LevelUP();
         }
 
-        float percent = exp > 0 ? exp / maxExp : 0;
+        float percent = exp > 0 ? exp / (float)maxExp : 0;
         UIManager.Instance.SetExp(percent);
     }
 
