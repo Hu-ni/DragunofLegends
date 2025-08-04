@@ -37,5 +37,7 @@ public abstract class WeaponBase : MonoBehaviour
         {
             return;
         }
+
+        attackCooltime = cooldown;
     }
 }

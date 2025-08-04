@@ -79,7 +79,6 @@ public class MeleeWeapon : WeaponBase
         effectAnimator.SetTrigger("IsAttack");
 
         Debug.Log("공격");
-        attackCooltime = cooldown;
 
     }
 
