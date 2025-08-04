@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         //Debug.Log("GameManager Start 메서드 호출됨!");
         //SceneManager.LoadScene(Constants.Scene_Stage_UI, LoadSceneMode.Additive);
-        NextStage();    // TODO: UI 상호작용으로 이동
+        //NextStage();    // TODO: UI 상호작용으로 이동
         //StartSpawnMonster();
     }
 

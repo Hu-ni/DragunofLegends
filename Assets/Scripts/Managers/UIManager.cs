@@ -30,6 +30,11 @@ public class UIManager : MonoBehaviour
         popupRoot = GameObject.Find("PopupRoot");
     }
 
+    private void Start()
+    {
+        GameManager.instance.NextStage();
+    }
+
     #region 팝업UI 메소드
 
     public void InitCanvas(Canvas canvas)
