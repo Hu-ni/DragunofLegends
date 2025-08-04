@@ -47,6 +47,7 @@ public class Stage : MonoBehaviour
                     pool.GetMonster(spawn.Id, pool.gameObject.transform);
                     _aliveMonsters++;
                 }
+                GameManager.instance.UpdateMonsterCount(_aliveMonsters);
                 yield return new WaitForSeconds(spawn.delayAfter);
             }
             yield return new WaitForSeconds(1f);    // 웨이브 끝나면 1초 대기

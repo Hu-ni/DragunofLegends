@@ -8,12 +8,11 @@ public class GameManager : MonoBehaviour
     private EnemyResourceController _playerResourceController;
 
     [SerializeField]
-    private int currentWaveIndex = 0;
-
-    [SerializeField]
     private EnemyManager enemyManager;
-
+    [SerializeField]
     private StageManager _stage;
+    [SerializeField]
+    private UIManager _uiManager;
 
     private void Awake()
     {
@@ -46,11 +45,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Debug.Log("GameManager Start 메서드 호출됨!");
-        currentWaveIndex = 0;
-        NextStage();
+        NextStage();    // TODO: UI 상호작용으로 이동
+        StartSpawnMonster();
     }
 
-    void StartNextWave()
+    // 몬스터 생성 시작
+    void StartSpawnMonster()
     {
         _stage.SpawnMonster();
     }
