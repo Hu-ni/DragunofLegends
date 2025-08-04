@@ -32,8 +32,7 @@ MonoBehaviour:
   - 0.4
   weaponSprites:
   - {fileID: -712341607, guid: 74d0e37a51130e34a88bddefe16e1241, type: 3}
-  weaponAnimator: {fileID: 0}
-  effectSprites: []
+  effectAnimation: {fileID: 7400000, guid: 206fa12e066f7cd43bbf3a424c255334, type: 2}
   attackRanges:
   - 0.1
   - 0.2

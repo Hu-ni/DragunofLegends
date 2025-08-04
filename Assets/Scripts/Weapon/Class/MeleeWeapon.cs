@@ -9,9 +9,7 @@ public class MeleeWeapon : WeaponBase
 
     SpriteRenderer spriteRenderer;
 
-
-    public Vector2 boxSize = new Vector2(1f, 2f);
-    public Vector2 boxOffset = new Vector2(0.5f, 0f);
+    public Vector2 AttackBoxRange = new Vector2(0.5f, 1f);
 
     private void Awake()
     {
@@ -27,9 +25,9 @@ public class MeleeWeapon : WeaponBase
             weaponSprite = weaponData.weaponSprites[0];
         }
 
-        if (weaponAnimator == null)
+        if (effectAnimator == null)
         {
-            weaponAnimator = weaponData.weaponAnimator;
+            effectAnimator = GetComponentInChildren<Animator>();
         }
 
         if (spriteRenderer == null)
@@ -79,9 +77,10 @@ public class MeleeWeapon : WeaponBase
         
         LayerMask targetLayer = LayerMask.GetMask("Enemy");
 
-        Vector2 center = (Vector2)transform.position + (Vector2)(transform.right * boxOffset.x + transform.up * boxOffset.y);
+        Vector2 center = effectAnimator.transform.position + transform.right * AttackBoxRange.x / 2;
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(center, boxSize, 0f, targetLayer);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(center, AttackBoxRange, 0f, targetLayer);
+        effectAnimator.SetTrigger("IsAttack");
 
         Debug.Log("공격");
         attackCooltime = cooldown;
@@ -90,11 +89,12 @@ public class MeleeWeapon : WeaponBase
 
     void OnDrawGizmos()
     {
-        Vector2 center = (Vector2)transform.position + (Vector2)(transform.right * boxOffset.x + transform.up * boxOffset.y);
+        Vector2 center = transform.position + transform.right * AttackBoxRange.x / 2 + transform.right * 0.275f;
+
 
         Gizmos.color = Color.red;
         Gizmos.matrix = Matrix4x4.TRS(center, transform.rotation, Vector3.one);
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+        Gizmos.DrawWireCube(Vector3.zero, AttackBoxRange);
     }
 
 

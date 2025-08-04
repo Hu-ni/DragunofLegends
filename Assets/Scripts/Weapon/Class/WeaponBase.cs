@@ -14,7 +14,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected float criticalChance;
 
     protected Sprite weaponSprite;
-    protected Animator weaponAnimator;
+    protected Animator effectAnimator;
 
     protected float attackCooltime = 0f;
 

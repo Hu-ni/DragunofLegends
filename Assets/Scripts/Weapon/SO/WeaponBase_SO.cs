@@ -9,7 +9,6 @@ public class WeaponBase_SO : ScriptableObject
     public float[] criticalChances;
 
     public Sprite[] weaponSprites;
-    public Animator weaponAnimator;
-    public Sprite[] effectSprites;
+    public AnimationClip effectAnimation;
 
 }
