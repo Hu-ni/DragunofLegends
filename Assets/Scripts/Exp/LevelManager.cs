@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class LevelManager : MonoBehaviour
 {
@@ -41,7 +42,8 @@ public class LevelManager : MonoBehaviour
         {
             LevelUP();
         }
-        float percent = exp / maxExp;
+
+        float percent = exp > 0 ? exp / maxExp : 0;
         UIManager.Instance.SetExp(percent);
     }
 
@@ -53,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public void LevelUP()
     {
+        _level++;
         exp -= GetExpToNextLevel();
         UIManager.Instance.UpdateLevel(Level);
         UIManager.Instance.ShowPopupUI<LevelUpPopupUI>();
