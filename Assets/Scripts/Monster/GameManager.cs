@@ -55,10 +55,6 @@ public class GameManager : MonoBehaviour
     public void UpdateMonsterCount(int count)
     {
         UIManager.Instance.UpdateMonsterCount(count);
-
-        if (count <= 0)
-            _stage.CheckClearStage();    //스테이지를 클리어했는지 확인하고 클리어 시 포탈 활성화
-
     }
 
 }

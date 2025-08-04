@@ -95,13 +95,4 @@ public class StageManager : MonoBehaviour
     {
         _currStage.Execute(currentStageIdx);
     }
-
-    public void CheckClearStage()
-    {
-        if(_currStage.isClear)
-        {
-            _currStage.ClearStage();
-
-        }
-    }
 }

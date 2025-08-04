@@ -23,7 +23,11 @@ public class Stage : MonoBehaviour
     private int _aliveMonsters = 0;
     private bool _endWave = false;
 
-    public bool isClear => _aliveMonsters == 0 && _endWave;
+    private void OnEnable()
+    {
+        _endWave = false;
+        _aliveMonsters = 0;
+    }
 
     private void Start()
     {
@@ -57,6 +61,7 @@ public class Stage : MonoBehaviour
             yield return new WaitForSeconds(1f);    // 웨이브 끝나면 1초 대기
         }
         _endWave = true;
+        CheckClear();   // 만약 대기 전에 마지막 몬스터를 잡은 경우를 위해 한 번 더 체크
     }
 
     public void UpdateMonsterCount()
@@ -79,6 +84,13 @@ public class Stage : MonoBehaviour
         foreach (var orb in allOrbs)
         {
             orb.StartAttractToPlayer(player);
+        }
+    }
+    private void CheckClear()
+    {
+        if (_aliveMonsters <= 0 && _endWave)
+        {
+            ClearStage();
         }
     }
 }
