@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -46,21 +47,15 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log("GameManager Start 메서드 호출됨!");
         currentWaveIndex = 0;
-        StartGame();
-    }
-
-    public void StartGame()
-    { 
-        StartNextWave();
+        NextStage();
     }
 
     void StartNextWave()
     {
-        currentWaveIndex += 1;
-        enemyManager.StartWave(1 + currentWaveIndex / 5);
+        _stage.SpawnMonster();
     }
 
-    public void ClearStage()
+    public void NextStage()
     {
         // 스테이지 생성
         // 몬스터 스폰
@@ -73,5 +68,11 @@ public class GameManager : MonoBehaviour
         enemyManager.StopWave();
     }
 
-
+    public void UpdateMonsterCount(int count)
+    {
+        if (count <= 0)
+            _stage.ClearStage();
+        
+        // TODO: UI 업데이트
+    }
 }

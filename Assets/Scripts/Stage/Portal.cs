@@ -37,7 +37,7 @@ public class Portal: MonoBehaviour
         {
             isClear = false;
             _anim.SetTrigger(ClosePortal);
-            GameManager.instance.ClearStage();
+            GameManager.instance.NextStage();
         }
     }
 }

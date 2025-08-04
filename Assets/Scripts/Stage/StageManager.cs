@@ -96,4 +96,9 @@ public class StageManager : MonoBehaviour
     {
         _currStage.Execute();
     }
+
+    public void ClearStage()
+    {
+        _currStage.ClearStage();
+    }
 }

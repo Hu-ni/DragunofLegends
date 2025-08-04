@@ -15,25 +15,20 @@ public class Stage : MonoBehaviour
     // 몬스터 생성 및 웨이브
     [SerializeField]
     private List<SpawningPool> _spawningPools = new();
-
     [SerializeField]
     private List<WaveInfo> _waves = new();
 
-    public float spawnTiming = 0.2f;
-    private float timecheck = 0f;
+    private Portal _portal;
 
-    //private void Update()
-    //{
-    //    timecheck += Time.deltaTime;
-    //    if (timecheck >= spawnTiming)
-    //    {
-    //        foreach (SpawningPool pool in _spawningPools)
-    //        {
-    //            pool.GetMonster(0, pool.gameObject.transform);
-    //        }
-    //        timecheck = 0f;
-    //    }
-    //}
+    private int _aliveMonsters = 0;
+
+    private void Start()
+    {
+        foreach(var pool in _spawningPools)
+        {
+            pool.Initialize(this);
+        }
+    }
 
     public void Execute()
     {
@@ -50,10 +45,22 @@ public class Stage : MonoBehaviour
                 foreach (SpawningPool pool in _spawningPools)
                 {
                     pool.GetMonster(spawn.Id, pool.gameObject.transform);
+                    _aliveMonsters++;
                 }
                 yield return new WaitForSeconds(spawn.delayAfter);
             }
             yield return new WaitForSeconds(1f);    // 웨이브 끝나면 1초 대기
         }
+    }
+
+    public void UpdateMonsterCount()
+    {
+        _aliveMonsters -= 1;
+        GameManager.instance.UpdateMonsterCount(_aliveMonsters);
+    }
+
+    public void ClearStage()
+    {
+        _portal.OnClear();
     }
 }
