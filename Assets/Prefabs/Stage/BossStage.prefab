@@ -2940,7 +2940,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawningPools:
   - {fileID: 2460723089152020118}
-  _waves: []
+  _waves:
+  - {fileID: 11400000, guid: 0a511c86bfe58bf4585b455d2589bd49, type: 2}
   _portal: {fileID: 0}
 --- !u!1 &8500290500670371047
 GameObject:
