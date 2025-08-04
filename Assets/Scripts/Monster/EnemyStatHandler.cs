@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyStatHandler : MonoBehaviour
 {
     // 몬스터 체력 // 맞은 데미지 관리는 EnemyResourceController에서
-    [Range(1, 100)]
+    [Range(0, 100)]
     [SerializeField]
     private int health = 10;
     public int Health

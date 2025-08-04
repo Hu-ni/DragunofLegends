@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (UIManager.Instance == null)
+        {
+            SceneManager.LoadScene(Constants.SceneStageUI, LoadSceneMode.Additive);
+        }
+
         //if (enemyManager != null)
         //{
         //    enemyManager.Init(this);

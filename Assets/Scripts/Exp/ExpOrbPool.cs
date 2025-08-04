@@ -39,7 +39,10 @@ public class ExpOrbPool : MonoBehaviour
         }
         else
         {
-            return Instantiate(orbPrefabs[(int)type]);
+            GameObject go = Instantiate(orbPrefabs[(int)type]);
+            go.transform.parent = this.transform;
+
+            return go;
         }
     }
 
