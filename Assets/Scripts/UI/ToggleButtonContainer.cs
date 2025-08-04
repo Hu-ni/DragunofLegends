@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToggleButtonList : MonoBehaviour
+public class ToggleButtonContainer : MonoBehaviour
 {
     List<ToggleButton> buttons = new List<ToggleButton>();
     int selectedIndex = -1;
+    public int SelectedIndex { get { return selectedIndex; } }
 
     private void Awake()
     {
