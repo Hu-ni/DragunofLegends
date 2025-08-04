@@ -58,10 +58,10 @@ public class ProjectileWeapon : WeaponBase
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Attack();
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+            //Attack();
+        //}
     }
 
     public override void SetWeaponStat(int level)

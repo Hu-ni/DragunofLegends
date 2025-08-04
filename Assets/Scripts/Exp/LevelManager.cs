@@ -44,6 +44,7 @@ public class LevelManager : MonoBehaviour
         }
 
         float percent = exp > 0 ? exp / (float)maxExp : 0;
+        Debug.Log($"{exp}, {maxExp}, {percent}");
         UIManager.Instance.SetExp(percent);
     }
 
@@ -55,9 +56,11 @@ public class LevelManager : MonoBehaviour
 
     public void LevelUP()
     {
-        _level++;
         exp -= GetExpToNextLevel();
+
+        _level++;
         UIManager.Instance.UpdateLevel(Level);
-        UIManager.Instance.ShowPopupUI<LevelUpPopupUI>();
+        PlayerManager.Instance.LevelUpWeapon(_level);
+        //UIManager.Instance.ShowPopupUI<LevelUpPopupUI>();
     }
 }

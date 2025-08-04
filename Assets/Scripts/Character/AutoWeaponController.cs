@@ -28,7 +28,7 @@ public class AutoWeaponController : MonoBehaviour
     /// 무기 프리팹을 인스턴스화하고 보유 무기 목록에 추가하는 메서드
     /// </summary>
     /// <param name="weaponPrefab">추가할 무기 프리팹</param>
-    public void AddWeapon(GameObject weaponPrefab)
+    public WeaponBase AddWeapon(GameObject weaponPrefab)
     {
         if (weaponPivot != null && weaponPrefab != null)
         {
@@ -42,10 +42,12 @@ public class AutoWeaponController : MonoBehaviour
                 Coroutine attackCoroutine = StartCoroutine(AutoAttack(weaponBase));
                 attackCoroutines.Add(weaponBase, attackCoroutine);
             }
+            return weaponBase;
         }
         else
         {
             Debug.LogError("weaponpivot 오브젝트를 찾을 수 없거나 프리팹이 null입니다.");
+            return null;
         }
     }
 
@@ -90,7 +92,7 @@ public class AutoWeaponController : MonoBehaviour
 
 
     // 이 메서드는 이제 게임 시작 시 선택된 무기를 추가하기 위한 예시입니다.
-    public void AddInitialWeapon(string weaponName)
+    public WeaponBase AddInitialWeapon(string weaponName)
     {
         GameObject prefabToAdd = null;
         foreach (var prefab in weaponPrefabs)
@@ -104,11 +106,12 @@ public class AutoWeaponController : MonoBehaviour
 
         if (prefabToAdd != null)
         {
-            AddWeapon(prefabToAdd);
+            return AddWeapon(prefabToAdd);
         }
         else
         {
             Debug.LogWarning($"'${weaponName}' 이름의 무기 프리팹을 찾을 수 없습니다.");
+            return null;
         }
     }
 
@@ -131,6 +134,7 @@ public class AutoWeaponController : MonoBehaviour
         RotateWeaponsTowardsMouse();
     }
 
+    // 테스트용 함수
     private void RotateWeaponsTowardsMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
