@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1144493604}
     m_Modifications:
+    - target: {fileID: 140230020476283572, guid: 59c7e6fefad70974eae5459793de121e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 300f11ac24682fc4580b6711e5c9f605, type: 3}
     - target: {fileID: 580679682309444250, guid: 59c7e6fefad70974eae5459793de121e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 250
@@ -143,6 +147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToggleButtonContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2414308108365259254, guid: 59c7e6fefad70974eae5459793de121e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b59e2199f98d74949aca25d087ac5ed3, type: 3}
     - target: {fileID: 2917654172821494232, guid: 59c7e6fefad70974eae5459793de121e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 250
@@ -873,6 +881,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1600099656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5856554720958404171, guid: 59c7e6fefad70974eae5459793de121e, type: 3}
+  m_PrefabInstance: {fileID: 181027044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e39335bcd60a2409faadc7b7bdbfbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1717024338
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78dce1498537e24e99f9834e5a14be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonContainer: {fileID: 1600099656}
 --- !u!114 &2128369618
 MonoBehaviour:
   m_ObjectHideFlags: 0
