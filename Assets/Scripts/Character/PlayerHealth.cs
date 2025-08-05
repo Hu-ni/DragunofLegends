@@ -66,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player has died.");
         // 게임오버, 플레이어 사망을 여기에
+        GameManager.instance.GameOver();
         gameObject.SetActive(false); // 일단 플레이어 오브젝트 비활성화
     }
 }

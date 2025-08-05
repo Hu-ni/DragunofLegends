@@ -49,7 +49,23 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        UIManager.Instance.ShowPopupUI<ResultPopupUI>();
+        int bestStage = 0;
+        if (PlayerPrefs.HasKey("BestStage"))
+        {
+            bestStage = PlayerPrefs.GetInt("BestStage");
+            if (bestStage < _stage.CurrentStageIdx)
+            {
+                bestStage = _stage.CurrentStageIdx;
+            }
+            PlayerPrefs.SetInt("BestStage",bestStage);
+        }
+        else
+        {
+            bestStage = _stage.CurrentStageIdx;
+        }
+
+        ResultPopupUI ui = UIManager.Instance.ShowPopupUI<ResultPopupUI>();
+        ui.Initialize(_stage.CurrentStageIdx, bestStage);
     }
 
     public void UpdateMonsterCount(int count)

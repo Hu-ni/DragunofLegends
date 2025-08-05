@@ -50,11 +50,11 @@ public class ResultPopupUI : PopupUI
 
         restartButton.onClick.AddListener(() =>
         {
-            Debug.Log("게임 재시작 하도록 수정");
+            SceneManager.LoadScene(Constants.SceneStage);
         });
         mainMenuButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("WeaponSelectScene");
+            SceneManager.LoadScene(Constants.SceneWeaponSelected);
         });
     }
 
