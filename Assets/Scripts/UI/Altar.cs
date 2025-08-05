@@ -13,6 +13,10 @@ public class Altar : MonoBehaviour
 
     public float radius = 2f;
     private bool usedRest = false;
+
+    [SerializeField]
+    private Portal _portal;
+
     private void OnDisable()
     {
         _anim.SetBool("usedRest", false);
@@ -55,6 +59,7 @@ public class Altar : MonoBehaviour
         {
             UIManager.Instance.ShowPopupUI<RestPopupUI>();
             usedRest = true;
+            _portal.OnClear();
         }
     }
 }
