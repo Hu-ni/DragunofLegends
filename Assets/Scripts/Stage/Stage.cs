@@ -68,6 +68,7 @@ public class Stage : MonoBehaviour
     {
         _aliveMonsters -= 1;
         GameManager.instance.UpdateMonsterCount(_aliveMonsters);
+        CheckClear();
     }
 
     public void ClearStage()
