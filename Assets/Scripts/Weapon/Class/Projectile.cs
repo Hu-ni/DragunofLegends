@@ -44,11 +44,18 @@ public class Projectile : MonoBehaviour
         }
 
         Debug.Log("Enemy에 트리거");
-        collision.GetComponent<EnemyBaseController>().Death();      // 테스트
 
+        EnemyBaseController enemyBaseController = collision.GetComponent<EnemyBaseController>();
+        if (enemyBaseController != null)
+        {
+            enemyBaseController.Death();
+        }
+        else
+        {
+            collision.GetComponent<BossStatHandler>().TakeDamage(Instigator.Damage);
+        }
 
         // enemy character에서 데미지 계산
-        // collision.gameObject.GetComponent<Enemy>().TakeDamage(Instigator);
 
         hitCount++;
         if (hitCount > Instigator.PenetrationCount)

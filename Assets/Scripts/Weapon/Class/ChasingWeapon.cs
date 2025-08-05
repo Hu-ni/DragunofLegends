@@ -165,6 +165,21 @@ public class ChasingWeapon : WeaponBase
 
         if (CheckTargetIsClose(target))
         {
+            string layerName = LayerMask.LayerToName(target.gameObject.layer);
+            LayerMask layerMask = LayerMask.GetMask(layerName);
+            if (layerMask == LayerMask.GetMask("Enemy"))
+            {
+                EnemyBaseController enemyBaseController = target.GetComponent<EnemyBaseController>();
+                if (enemyBaseController != null)
+                {
+                    enemyBaseController.Death();
+                }
+                else
+                {
+                    target.GetComponent<BossStatHandler>().TakeDamage(Damage);
+                }
+            }
+            
             chasingState = ChasingState.Idle;
             target = null;
             return;
@@ -190,19 +205,5 @@ public class ChasingWeapon : WeaponBase
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        string layerName = LayerMask.LayerToName(collision.gameObject.layer);
-        LayerMask layerMask = LayerMask.GetMask(layerName);
-
-        if (layerMask != LayerMask.GetMask("Enemy"))
-        {
-            return;
-        }
-
-        // enemy TakeDamage 메서드 호출
-        Debug.Log("에너미와 충돌");
-        collision.GetComponent<EnemyBaseController>().Death();      // 테스트
-
-    }
+   
 }

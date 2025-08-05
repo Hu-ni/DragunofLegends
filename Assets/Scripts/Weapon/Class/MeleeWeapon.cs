@@ -80,11 +80,20 @@ public class MeleeWeapon : WeaponBase
 
         foreach(Collider2D hit in hits)
         {
-            hit.GetComponent<EnemyBaseController>().Death();      // 테스트
+            EnemyBaseController enemyBaseController = hit.GetComponent<EnemyBaseController>();
+            if (enemyBaseController != null)
+            {
+                enemyBaseController.Death();
+            }
+            else
+            {
+                hit.GetComponent<BossStatHandler>().TakeDamage(Damage);
+            }
 
         }
 
         Debug.Log("공격");
+
 
     }
 

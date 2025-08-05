@@ -10,6 +10,7 @@ public abstract class WeaponBase : MonoBehaviour
     protected WeaponBase_SO weaponData;
 
     protected float damage;
+    public float Damage { get { return damage; } }
     public float cooldown;
     protected float criticalChance;
 
