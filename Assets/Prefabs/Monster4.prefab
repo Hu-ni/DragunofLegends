@@ -183,7 +183,7 @@ MonoBehaviour:
   maxHealth: 10
   meleeDamage: 10
   rangedDamage: 5
-  projectileSpeed: 10
+  projectileSpeed: 5
 --- !u!195 &7695805667726428269
 NavMeshAgent:
   m_ObjectHideFlags: 0
